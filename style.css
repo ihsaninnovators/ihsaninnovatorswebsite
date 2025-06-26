@@ -17,15 +17,14 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: #000000; 
 }
 
 body {
+    /* Updated for linear gradient background - now left-to-right */
     background-image: linear-gradient(to right, #1A1A1A, #000000); 
     color: var(--primary-text-color);
     font-family: 'Nunito Sans', sans-serif; 
     overflow-x: hidden;
-    background-color: #000000; 
 }
 
 .container {
@@ -42,21 +41,23 @@ body {
     width: 100%;
     padding: 20px 0;
     z-index: 100;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease; /* Added border-bottom to transition */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle default shadow */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* NEW: Subtle white border always visible */
 }
 
 .main-header.scrolled {
-    background-color: rgba(17, 17, 17, 0.95); 
+    background-color: rgba(17, 17, 17, 0.95); /* Slightly less transparent when scrolled */
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* More prominent shadow when scrolled */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Slightly more visible border when scrolled */
 }
+
 
 .main-header.header-hidden {
     transform: translateY(-100%);
 }
+
 
 .nav-container {
     display: flex;
@@ -114,41 +115,36 @@ body {
 .main-nav ul li a {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
-    color: var(--secondary-text-color); /* Default text color */
+    color: var(--secondary-text-color);
     font-weight: 700;
     text-decoration: none;
     padding: 8px 18px; 
     border-radius: 999px;
-    transition: color 0.3s ease; /* Only text color transition */
+    transition: color 0.3s ease;
     position: relative; 
-    z-index: 2; /* Ensures text is above highlighter */
+    z-index: 2;
     display: block;
 }
 
-/* REVERTED: Hover effect - Highlighter now provides background */
 .main-nav ul li a:hover {
-    color: var(--primary-text-color); /* Text brighter on hover */
-    text-shadow: none; /* Removed text-shadow */
+    color: var(--primary-text-color);
 }
 
-/* REVERTED: Active link - Highlighter now provides background */
 .main-nav ul li a.active {
-    color: #FFFFFF; /* Text white when active */
-    text-shadow: none; /* Removed text-shadow */
+    color: #FFFFFF;
 }
-
 
 .main-nav .highlighter {
     position: absolute;
-    background-color: var(--accent-color); /* The blue bubble color */
+    background-color: var(--accent-color);
     border-radius: 999px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smooth slide animation */
-    z-index: 1; /* Sits behind text */
-    opacity: 1; /* Initially visible (or set by JS) */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the bubble */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
 }
-
-/* REMOVED: .main-nav .highlighter.no-transition as it's no longer needed for this exact behavior */
 
 
 /* --- HERO SECTION & GENERAL HEADINGS --- */
@@ -324,6 +320,12 @@ body {
     opacity: 0; 
 }
 
+.typing-effect::after {
+    content: '|';
+    color: var(--secondary-text-color);
+    animation: blink 1s step-end infinite;
+}
+
 @keyframes blink {
     from, to {
         opacity: 0;
@@ -336,7 +338,7 @@ body {
 
 /* --- STYLES FOR ABOUT & GENERIC PAGES --- */
 .page-title-section {
-    padding: 140px 0 40px 0; 
+    padding: 140px 0 40px 0; /* Default for larger screens */
     text-align: center;
 }
 
@@ -546,10 +548,6 @@ body {
     margin-top: 5px;
 }
 
-.contact-block .email-link { 
-    color: #85C7F2; 
-}
-
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 1024px) {
     .sub-teams-layout {
@@ -602,7 +600,7 @@ body {
         flex-direction: column; /* Stack logo and nav vertically */
         align-items: flex-start; /* Align to the left */
     }
-    
+
     .logo-header {
         margin-bottom: 15px; /* Space between logo group and nav */
     }
