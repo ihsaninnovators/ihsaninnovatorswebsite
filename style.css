@@ -135,7 +135,6 @@ body {
 .main-nav ul li a.active {
     color: var(--primary-text-color); /* Active text color (bright) */
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Text glow for active state */
-    /* REMOVED: background-color, transform, box-shadow from here */
 }
 
 
@@ -147,6 +146,11 @@ body {
     z-index: 1; /* Sits behind text */
     opacity: 0; /* Initially hidden, made visible by JS for active state ONLY */
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the active bubble */
+}
+
+/* NEW: Class to temporarily disable highlighter transition */
+.main-nav .highlighter.no-transition {
+    transition: none !important;
 }
 
 
