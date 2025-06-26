@@ -65,29 +65,29 @@ body {
     font-size: 1.5rem;
     color: var(--primary-text-color);
     text-decoration: none;
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
+    display: flex; /* Changed to flex (row is default) */
+    align-items: center; /* Aligns items vertically in the middle */
+    gap: 12px; /* Gap between the image and the text container */
 }
 
-.logo-header .text-group { 
+.logo-header .text-group { /* NEW: A container for the name and number */
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    line-height: 1; 
+    flex-direction: column; /* Stacks name and number vertically */
+    align-items: flex-start; /* Aligns text to the left within its group */
+    line-height: 1; /* Adjust for tight stacking */
 }
 
 .header-logo-img {
     height: 40px;
 }
 
-.logo-header .text-group span:first-of-type { 
+.logo-header .text-group span:first-of-type { /* Targets "Ihsan Innovators" */
     font-size: 1.5rem; 
     font-weight: 700;
     line-height: 1.2; 
 }
 
-.logo-header .team-number { 
+.logo-header .team-number { /* Style for the team number */
     font-size: 0.75rem; 
     font-weight: 400; 
     color: var(--secondary-text-color); 
@@ -160,7 +160,7 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
-    padding-top: 100px; /* Default for larger screens */
+    padding-top: 100px; 
 }
 
 .hero-content {
@@ -599,11 +599,11 @@ body {
         margin-bottom: 15px; /* Space between logo group and nav */
     }
 
-    /* FIX FOR HEADER OVERLAP ON MOBILE */
-    .hero {
-        padding-top: 180px; /* Increased padding to push content down */
+    /* REMOVED: Fixed padding-top for sections as JS handles it dynamically */
+    /* .hero {
+        padding-top: 180px; 
     }
     .page-title-section {
-        padding-top: 180px; /* Increased padding for other pages too */
-    }
+        padding-top: 180px; 
+    } */
 }
