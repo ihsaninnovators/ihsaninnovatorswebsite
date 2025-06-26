@@ -391,10 +391,10 @@ body {
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    display: flex; /* RE-ADDED */
-    flex-direction: column; /* RE-ADDED */
-    justify-content: center; /* Changed from flex-start to center, as it was originally. */
-    aspect-ratio: 1 / 1; /* This was causing issues with content expansion */
+    display: flex; /* THIS IS THE CRUCIAL LINE */
+    flex-direction: column; /* THIS IS THE CRUCIAL LINE */
+    justify-content: center; 
+    aspect-ratio: 1 / 1; 
     padding: 20px;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -413,6 +413,13 @@ body {
     margin-bottom: 15px; 
     margin-left: auto; 
     margin-right: auto;
+}
+
+.team-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* Ensures images are centered within the square */
 }
 
 .team-card .card-content {
