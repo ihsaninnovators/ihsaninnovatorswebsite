@@ -298,4 +298,312 @@ body {
     color: var(--accent-color);
 }
 
-.copyright-text
+.copyright-text {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    color: var(--secondary-text-color);
+    opacity: 0.8;
+}
+
+
+/* --- ANIMATION STYLES --- */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.typewriter {
+    opacity: 0; 
+}
+
+@keyframes blink {
+    from, to {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* --- STYLES FOR ABOUT & GENERIC PAGES --- */
+.page-title-section {
+    padding: 140px 0 40px 0; 
+    text-align: center;
+}
+
+.page-title-section h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.1;
+}
+
+.page-title-section .subtitle {
+    max-width: 800px;
+    margin: 20px auto 0 auto;
+    font-size: 1.1rem;
+    color: var(--secondary-text-color);
+}
+
+.content-section {
+    padding: 40px 0 80px 0; 
+}
+
+.grid-two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.grid-col-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+}
+
+.boxed-section {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 50px;
+}
+
+/* --- STYLES FOR TEAM PAGE --- */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.team-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    aspect-ratio: 1 / 1; 
+    padding: 20px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.team-card .card-image {
+    width: 180px; 
+    height: 180px;
+    border-radius: 8px; 
+    overflow: hidden;
+    background-color: var(--bg-color);
+    margin-bottom: 15px; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.team-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-card .card-content .role {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 4px;
+}
+
+.team-card .card-content h3 {
+    font-size: 1.2rem;
+    color: var(--primary-text-color);
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+.team-card .card-content .email {
+    font-size: 0.9rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    word-break: break-all;
+}
+
+.team-card .card-content .email:hover {
+    color: var(--primary-text-color);
+}
+
+/* --- STYLES FOR TEAM CATEGORY HEADINGS --- */
+.team-category-heading {
+    grid-column: 1 / -1; 
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: block; 
+    width: 100%; 
+}
+
+.team-category-heading h2 {
+    font-size: 2.5rem; 
+    color: var(--primary-text-color);
+    margin-bottom: 0;
+}
+
+
+/* --- STYLES FOR SUB-TEAMS PAGE --- */
+.sub-teams-section {
+    padding: 140px 0 80px 0;
+}
+
+.sub-teams-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.sub-teams-intro h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.sub-teams-intro p {
+    color: var(--secondary-text-color);
+}
+
+.sub-teams-intro .contact-button-container {
+    text-align: left; 
+    margin-top: 30px; 
+}
+
+
+.sub-team-item {
+    margin-bottom: 40px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.sub-team-item:last-child {
+    margin-bottom: 0;
+}
+
+.sub-team-item h2 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.sub-team-item p {
+    color: var(--secondary-text-color);
+    margin-bottom: 15px;
+}
+
+.sub-team-item ul {
+    list-style-position: outside;
+    padding-left: 20px;
+    color: var(--secondary-text-color);
+}
+
+.sub-team-item ul ul {
+    margin-top: 10px;
+}
+
+.sub-team-item li {
+    margin-bottom: 15px;
+}
+
+/* --- STYLES FOR CONTACT PAGE --- */
+.contact-info-layout {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    text-align: center;
+}
+
+.contact-block h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.contact-block .secondary-text {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.contact-block .email-link { 
+    color: #85C7F2; 
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 1024px) {
+    .sub-teams-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 900px) {
+    .grid-two-cols {
+        grid-template-columns: 1fr;
+    }
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-info-layout {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* New/Adjusted Media Queries for Navigation */
+    .main-nav ul {
+        flex-direction: column; /* Stack navigation links vertically */
+        position: static; /* Remove absolute positioning */
+        width: 100%;
+        gap: 5px; /* Reduce gap between stacked links */
+    }
+
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav ul li a {
+        padding: 10px 0; /* Adjust vertical padding for stacked links */
+        width: 100%; /* Make links take full width */
+    }
+
+    /* Hide highlighter on smaller screens if it causes issues */
+    .main-nav .highlighter {
+        display: none;
+    }
+
+    .nav-container {
+        flex-direction: column; /* Stack logo and nav vertically */
+        align-items: flex-start; /* Align to the left */
+    }
+    
+    .logo-header {
+        margin-bottom: 15px; /* Space between logo group and nav */
+    }
+}
