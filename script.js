@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = nav ? nav.querySelectorAll('li a') : []; 
 
     // Flag to ensure initial positioning is instant
-    let isInitialPageLoad = true; // RE-INTRODUCED THIS FLAG
+    let isInitialPageLoad = true; // KEEP THIS FLAG
 
     // --- Dynamic Header Padding Fix Function ---
     let resizeTimeout;
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Original Auto-Hiding Header Effect (keep as is) ---
+    // --- Original Auto-Hiding Header Effect ---
     let lastScrollTop = 0;
     if (header) {
         window.addEventListener('scroll', () => {
