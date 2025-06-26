@@ -171,9 +171,9 @@ body {
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: flex-start; /* Changed from center to flex-start to move content to top */
+    align-items: flex-start; 
     text-align: center;
-    padding-top: 100px; /* Keep this default padding */
+    padding-top: 100px; 
 }
 
 .hero-content {
@@ -202,7 +202,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* THIS IS THE TRANSITION FOR THE ANIMATION */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .cta-button:hover {
@@ -393,9 +393,8 @@ body {
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    aspect-ratio: 1 / 1; 
+    justify-content: flex-start; /* Changed from center to flex-start */
+    /* REMOVED aspect-ratio: 1 / 1; to allow for dynamic height when expanding */
     padding: 20px;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -422,6 +421,11 @@ body {
     object-fit: cover;
 }
 
+.team-card .card-content { /* Added this for better organization */
+    text-align: center;
+    flex-grow: 1; /* Allow content to take available space */
+}
+
 .team-card .card-content .role {
     font-size: 0.9rem;
     color: var(--secondary-text-color);
@@ -445,6 +449,52 @@ body {
 
 .team-card .card-content .email:hover {
     color: var(--primary-text-color);
+}
+
+/* NEW: More Button Styling */
+.team-card .more-button {
+    background-color: var(--accent-color); /* Blue background */
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 15px; /* Space between email and button */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.team-card .more-button:hover {
+    background-color: #0069d9; /* Slightly darker blue on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 123, 255, 0.2);
+}
+
+/* NEW: About Me Section Styling */
+.about-me-section {
+    max-height: 0; /* Initially hidden */
+    overflow: hidden; /* Hide overflowing content */
+    transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Smooth transition for expansion */
+    padding: 0 15px; /* Horizontal padding, vertical padding controlled by max-height */
+    text-align: left; /* Align text to left within section */
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+    line-height: 1.6;
+    margin-top: 15px; /* Space after the button */
+    border-top: 1px solid var(--border-color); /* Separator line */
+    padding-top: 15px; /* Padding above text after border */
+}
+
+.about-me-section p { /* Style for paragraph inside about-me-section */
+    margin-bottom: 0;
+}
+
+.about-me-section.expanded {
+    max-height: 300px; /* Adjust based on expected content height */
+    /* You might need to make this a very large value like 1000px if content varies greatly */
+    /* Alternatively, remove max-height and use display:block/none, but it's not animated then */
 }
 
 /* --- STYLES FOR TEAM CATEGORY HEADINGS --- */
@@ -571,7 +621,7 @@ body {
 
 @media (max-width: 600px) {
     .team-grid {
-        flex-direction: column; /* Force single column on smaller screens */
+        flex-direction: column; 
     }
     .contact-info-layout {
         flex-direction: column;
@@ -580,10 +630,10 @@ body {
 
     /* New/Adjusted Media Queries for Navigation */
     .main-nav ul {
-        flex-direction: column; /* Stack navigation links vertically */
-        position: static; /* Remove absolute positioning */
+        flex-direction: column; 
+        position: static; 
         width: 100%;
-        gap: 5px; /* Reduce gap between stacked links */
+        gap: 5px; 
     }
 
     .main-nav ul li {
@@ -592,8 +642,8 @@ body {
     }
 
     .main-nav ul li a {
-        padding: 10px 0; /* Adjust vertical padding for stacked links */
-        width: 100%; /* Make links take full width */
+        padding: 10px 0; 
+        width: 100%; 
     }
 
     /* Hide highlighter on smaller screens if it causes issues */
@@ -602,11 +652,11 @@ body {
     }
 
     .nav-container {
-        flex-direction: column; /* Stack logo and nav vertically */
-        align-items: flex-start; /* Align to the left */
+        flex-direction: column; 
+        align-items: flex-start; 
     }
     
     .logo-header {
-        margin-bottom: 15px; /* Space between logo group and nav */
+        margin-bottom: 15px; 
     }
 }
