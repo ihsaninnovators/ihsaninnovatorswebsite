@@ -148,7 +148,10 @@ body {
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the bubble */
 }
 
-/* REMOVED: .main-nav .highlighter.no-transition as it's no longer needed for this exact behavior */
+/* NEW: Class to temporarily disable highlighter transition */
+.main-nav .highlighter.no-transition {
+    transition: none !important;
+}
 
 
 /* --- HERO SECTION & GENERAL HEADINGS --- */
