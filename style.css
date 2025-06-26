@@ -17,18 +17,14 @@
 
 html {
     scroll-behavior: smooth;
-    /* This ensures the very base background is black for overscroll */
     background-color: #000000; 
 }
 
 body {
-    /* Updated for linear gradient background - now left-to-right */
     background-image: linear-gradient(to right, #1A1A1A, #000000); 
     color: var(--primary-text-color);
     font-family: 'Nunito Sans', sans-serif; 
     overflow-x: hidden;
-    
-    /* This sets the background color that shows on overscroll, matching html */
     background-color: #000000; 
 }
 
@@ -58,11 +54,9 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
 }
 
-
 .main-header.header-hidden {
     transform: translateY(-100%);
 }
-
 
 .nav-container {
     display: flex;
@@ -125,7 +119,7 @@ body {
     text-decoration: none;
     padding: 8px 18px; 
     border-radius: 999px;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Added transitions for active state */
     position: relative; 
     z-index: 2;
     display: block;
@@ -137,6 +131,9 @@ body {
 
 .main-nav ul li a.active {
     color: #FFFFFF;
+    background-color: var(--accent-color); /* Bubble background */
+    transform: scale(1.05); /* Slightly expand the bubble */
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Subtle glow */
 }
 
 .main-nav .highlighter {
@@ -343,7 +340,7 @@ body {
 
 /* --- STYLES FOR ABOUT & GENERIC PAGES --- */
 .page-title-section {
-    padding: 140px 0 40px 0; /* Default for larger screens */
+    padding: 140px 0 40px 0; 
     text-align: center;
 }
 
@@ -553,7 +550,7 @@ body {
     margin-top: 5px;
 }
 
-.contact-block .email-link { /* NEW: A lighter shade of blue for contact emails */
+.contact-block .email-link { 
     color: #85C7F2; 
 }
 
