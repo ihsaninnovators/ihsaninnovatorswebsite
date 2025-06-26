@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.main-nav'); 
     const highlighter = nav ? nav.querySelector('.highlighter') : null; 
     const activeLink = nav ? nav.querySelector('a.active') : null; 
-    // const links = nav ? nav.querySelectorAll('li a') : []; // Not used for hover movement
+    const links = nav ? nav.querySelectorAll('li a') : []; // Re-enabled links for hover control
 
     // --- Dynamic Header Padding Fix Function ---
     let resizeTimeout;
@@ -16,12 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Position Highlighter ONLY on Active Link (NOW WITH SLIDE ANIMATION ON LOAD) ---
-    function positionHighlighterOnActive() {
-        if (!highlighter) return; 
+    // --- Position Highlighter on Active Link or Hovered Link (Unified) ---
+    // This function now handles positioning the bubble for both active and hover states.
+    function moveHighlighter(targetLink) {
+        if (!highlighter || !nav) return; // Ensure highlighter and nav exist
 
-        if (activeLink) {
-            const linkRect = activeLink.getBoundingClientRect();
+        if (targetLink) {
+            const linkRect = targetLink.getBoundingClientRect();
             const navRect = nav.getBoundingClientRect();
 
             highlighter.style.width = `${linkRect.width}px`;
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             highlighter.style.transform = `translate(${offsetLeft}px, ${offsetTop}px)`;
             highlighter.style.opacity = '1'; // Ensure highlighter is visible
         } else {
-            // If no active link, hide the highlighter
+            // If no target (e.g., hiding when no active link and mouse leaves nav)
             highlighter.style.opacity = '0';
         }
     }
@@ -41,19 +42,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners for Dynamic Padding and Initial Highlighter Position ---
     window.addEventListener('load', () => {
         setMainPadding(); 
-        positionHighlighterOnActive(); // Position highlighter on active link after everything loads
+        if (activeLink) {
+            moveHighlighter(activeLink); // Position highlighter on active link on full load
+        } else if (highlighter) {
+            highlighter.style.opacity = '0'; // Hide if no active link
+        }
     });
-    document.addEventListener('DOMContentLoaded', setMainPadding); // For faster initial padding
+    document.addEventListener('DOMContentLoaded', () => {
+        setMainPadding(); 
+        if (activeLink) {
+            moveHighlighter(activeLink); // Position highlighter on active link on DOM ready
+        } else if (highlighter) {
+            highlighter.style.opacity = '0'; // Hide if no active link
+        }
+    });
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             setMainPadding();
-            positionHighlighterOnActive(); // Reposition highlighter on active link after resize
+            if (activeLink) { 
+                moveHighlighter(activeLink); 
+            } else if (highlighter) {
+                highlighter.style.opacity = '0';
+            }
         }, 50); 
     });
 
     setMainPadding(); // Initial calls
-    positionHighlighterOnActive(); // Initial calls
+    if (activeLink) {
+        moveHighlighter(activeLink);
+    } else if (highlighter) {
+        highlighter.style.opacity = '0';
+    }
 
 
     // --- Original Auto-Hiding Header Effect (keep as is) ---
@@ -75,9 +95,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Hover for Navigation Links (Purely CSS for text glow; no JS for highlighter movement on hover) ---
-    // The previous mouseenter/mouseleave events for the highlighter are intentionally absent here.
-    // The highlighter is now controlled ONLY by the active state.
+    // --- RE-ENABLED: Hover for Navigation Links (Highlighter now moves on hover) ---
+    if (nav && highlighter) { // Only if nav and highlighter exist
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => moveHighlighter(link));
+        });
+
+        // When mouse leaves the entire nav, move highlighter back to active link or hide
+        nav.addEventListener('mouseleave', () => {
+            if (activeLink) {
+                moveHighlighter(activeLink); // Move back to active link
+            } else {
+                // If no active link, hide the highlighter completely
+                highlighter.style.opacity = '0';
+            }
+        });
+    }
 
 
     // --- Original Typewriter Effect (keep as is) ---
@@ -122,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 observer.unobserve(entry.target);
             }
+            // Removed: else { entry.target.classList.remove('is-visible'); } // Keep active on scroll
         });
     }, observerOptions);
 
