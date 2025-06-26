@@ -203,6 +203,9 @@ body {
     font-weight: 600;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    /* Added for button element compatibility */
+    border: none;
+    cursor: pointer;
 }
 
 .cta-button:hover {
@@ -393,8 +396,9 @@ body {
     border-radius: 12px;
     display: flex; 
     flex-direction: column; 
-    justify-content: center; 
-    aspect-ratio: 1 / 1; 
+    /* Changed from justify-content center to start */
+    justify-content: flex-start; 
+    /* Removed aspect-ratio to allow card to grow */
     padding: 20px;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -413,6 +417,8 @@ body {
     margin-bottom: 15px; 
     margin-left: auto; 
     margin-right: auto;
+    /* Added flex-shrink to prevent image from shrinking */
+    flex-shrink: 0;
 }
 
 .team-card .card-image img {
@@ -613,4 +619,35 @@ body {
     .logo-header {
         margin-bottom: 15px; 
     }
+}
+
+
+/* --- STYLES FOR EXPANDABLE TEAM CARD --- */
+
+/* Style for the "More" button */
+.team-card .more-button {
+    padding: 8px 20px; /* Smaller padding than main CTA buttons */
+    font-size: 0.9rem;
+    margin-top: 15px;
+    width: auto;
+    display: inline-block;
+}
+
+/* Initially hide the "About Me" section */
+.team-card .about-me-section {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), padding 0.5s ease;
+    padding: 0 20px; /* Add horizontal padding but no vertical */
+    text-align: left;
+    color: var(--secondary-text-color);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Style for the "About Me" section when it's expanded */
+.team-card .about-me-section.expanded {
+    max-height: 500px; /* A large enough value to show all content */
+    padding: 20px 20px; /* Add vertical padding when expanded */
+    transition: max-height 1s ease-in-out, padding 0.5s ease;
 }
