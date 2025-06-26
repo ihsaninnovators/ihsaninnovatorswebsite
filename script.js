@@ -1,9 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Auto-Hiding Header Effect ---
     const header = document.getElementById('main-header');
-    let lastScrollTop = 0;
+    const mainContent = document.querySelector('main'); // Ensure this selects your <main> element
 
+    // --- NEW: Dynamic Header Padding Fix Function ---
+    let resizeTimeout;
+    function setMainPadding() {
+        if (header && mainContent) {
+            // Get the computed height of the fixed header
+            const headerHeight = header.offsetHeight; 
+            // Apply this height as padding-top to the main content area
+            mainContent.style.paddingTop = `${headerHeight}px`;
+        }
+    }
+
+    // --- Event Listeners for Dynamic Padding ---
+    // 1. On initial load (ensures images/fonts in header are rendered)
+    window.addEventListener('load', setMainPadding); 
+    // 2. On DOMContentLoaded (as a fallback, ensures basic DOM is ready)
+    document.addEventListener('DOMContentLoaded', setMainPadding);
+    // 3. On window resize (with debounce for performance)
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(setMainPadding, 50); // Debounce to prevent rapid recalculations
+    });
+    // 4. Also call it initially, in case 'load' fires after browser's internal rendering is complete
+    setMainPadding();
+
+    // --- Original Auto-Hiding Header Effect ---
+    let lastScrollTop = 0;
     if (header) {
         window.addEventListener('scroll', () => {
             let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -24,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Sliding Nav Highlighter ---
+    // --- Original Sliding Nav Highlighter ---
     const nav = document.querySelector('.main-nav');
     if (nav) {
         const highlighter = nav.querySelector('.highlighter');
@@ -60,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 3. Typewriter Effect Function ---
+    // --- Original Typewriter Effect Function ---
     function typewriterEffect(element, speed = 50) {
         if (element.dataset.typed) {
             return;
@@ -85,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 4. Scroll-Reveal and Typewriter Animation Trigger ---
+    // --- Original Scroll-Reveal and Typewriter Animation Trigger ---
     const observerOptions = {
         root: null,
         threshold: 0.1,
