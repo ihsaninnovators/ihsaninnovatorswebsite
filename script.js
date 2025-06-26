@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeLink = nav ? nav.querySelector('a.active') : null; 
     const links = nav ? nav.querySelectorAll('li a') : []; 
 
-    // Flag to ensure initial positioning is instant
+    // Flag to ensure initial positioning is instant (if applicable, in this older version, it's not used like that)
     let isInitialPageLoad = true; 
 
     // --- Dynamic Header Padding Fix Function ---
@@ -19,13 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Position Highlighter on Active Link or Hovered Link ---
+    // --- Position Highlighter on Active Link or Hovered Link (Unified) ---
     function moveHighlighter(targetLink) {
         if (!highlighter || !nav) return; 
 
-        if (isInitialPageLoad) { 
-            highlighter.classList.add('no-transition'); 
-        }
+        // In this older version, no special 'no-transition' handling for initial load is here.
+        // The transition will always apply.
 
         if (targetLink) {
             const linkRect = targetLink.getBoundingClientRect();
@@ -41,15 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             highlighter.style.opacity = '1'; 
         } else {
             highlighter.style.opacity = '0';
-        }
-
-        if (isInitialPageLoad) {
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => { 
-                    highlighter.classList.remove('no-transition');
-                    isInitialPageLoad = false; 
-                });
-            });
         }
     }
 
@@ -124,10 +114,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Typewriter Effect (PERMANENTLY DISABLED) ---
-    /* (function remains commented out) */
-    
-    // --- Scroll-Reveal Animation Trigger ---
+
+    // --- Typewriter Effect (ENABLED in this version) ---
+    function typewriterEffect(element, speed = 50) {
+        if (element.dataset.typed) {
+            return;
+        }
+        const text = element.dataset.text;
+        element.textContent = ''; 
+        element.style.opacity = 1;
+        element.classList.add('typing-effect');
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i); 
+                i++;
+            } else {
+                clearInterval(timer);
+                element.classList.remove('typing-effect');
+                element.dataset.typed = "true";
+            }
+        }, speed);
+    }
+
+    // --- Original Scroll-Reveal and Typewriter Animation Trigger ---
     const observerOptions = {
         root: null,
         threshold: 0.1,
@@ -139,36 +149,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.classList.contains('reveal-on-scroll')) {
                     entry.target.classList.add('is-visible');
                 }
+                // Typewriter effect ENABLED:
+                if (entry.target.classList.contains('typewriter')) {
+                    if (!entry.target.dataset.text) {
+                       entry.target.dataset.text = entry.target.textContent;
+                    }
+                    typewriterEffect(entry.target, 30); // Speed was 30ms initially
+                }
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); 
+    // Observe both .reveal-on-scroll and .typewriter elements
+    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .typewriter'); 
     elementsToAnimate.forEach(el => {
         observer.observe(el);
-    });
-
-    // --- NEW: Team Card "More" Button Expand/Collapse Logic ---
-    const moreButtons = document.querySelectorAll('.team-card .more-button');
-
-    moreButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const teamCard = button.closest('.team-card'); // Get the parent team-card
-            const aboutMeSection = teamCard.querySelector('.about-me-section');
-            
-            if (aboutMeSection) {
-                // Toggle the 'expanded' class
-                aboutMeSection.classList.toggle('expanded');
-
-                // Change button text
-                if (aboutMeSection.classList.contains('expanded')) {
-                    button.textContent = 'Less';
-                } else {
-                    button.textContent = 'More';
-                }
-            }
-        });
     });
 
 });
