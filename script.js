@@ -124,11 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Typewriter Effect (PERMANENTLY REMOVED AND RELATED OBSERVATION) ---
-    // The typewriterEffect function definition is removed.
-    // The observation for .typewriter elements is removed.
+    // --- Typewriter Effect (PERMANENTLY DISABLED) ---
+    /* (function remains commented out) */
     
-    // --- Original Scroll-Reveal Animation Trigger (Modified to exclude typewriter) ---
+    // --- Scroll-Reveal Animation Trigger ---
     const observerOptions = {
         root: null,
         threshold: 0.1,
@@ -140,16 +139,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.classList.contains('reveal-on-scroll')) {
                     entry.target.classList.add('is-visible');
                 }
-                // Removed condition and call for 'typewriter' elements
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe only .reveal-on-scroll elements (includes paragraphs previously with typewriter)
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); 
     elementsToAnimate.forEach(el => {
         observer.observe(el);
+    });
+
+    // --- NEW: Team Card "More" Button Expand/Collapse Logic ---
+    const moreButtons = document.querySelectorAll('.team-card .more-button');
+
+    moreButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const teamCard = button.closest('.team-card'); // Get the parent team-card
+            const aboutMeSection = teamCard.querySelector('.about-me-section');
+            
+            if (aboutMeSection) {
+                // Toggle the 'expanded' class
+                aboutMeSection.classList.toggle('expanded');
+
+                // Change button text
+                if (aboutMeSection.classList.contains('expanded')) {
+                    button.textContent = 'Less';
+                } else {
+                    button.textContent = 'More';
+                }
+            }
+        });
     });
 
 });
