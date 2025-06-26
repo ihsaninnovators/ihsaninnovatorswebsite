@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeLink = nav ? nav.querySelector('a.active') : null; 
     const links = nav ? nav.querySelectorAll('li a') : []; 
 
+    // Flag to ensure initial positioning is instant
+    let isInitialPageLoad = true; // RE-INTRODUCED THIS FLAG
+
     // --- Dynamic Header Padding Fix Function ---
     let resizeTimeout;
     function setMainPadding() {
@@ -16,9 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Position Highlighter on Active Link or Hovered Link (Unified) ---
+    // --- Position Highlighter on Active Link or Hovered Link ---
+    // Now uses the isInitialPageLoad flag to control instant appearance.
     function moveHighlighter(targetLink) {
         if (!highlighter || !nav) return; 
+
+        if (isInitialPageLoad) { // Only on the very first call after page load
+            highlighter.classList.add('no-transition'); // Temporarily disable transition
+        }
 
         if (targetLink) {
             const linkRect = targetLink.getBoundingClientRect();
@@ -31,33 +39,46 @@ document.addEventListener('DOMContentLoaded', () => {
             const offsetTop = linkRect.top - navRect.top;
 
             highlighter.style.transform = `translate(${offsetLeft}px, ${offsetTop}px)`;
-            highlighter.style.opacity = '1'; 
+            highlighter.style.opacity = '1'; // Ensure highlighter is visible
         } else {
+            // If no target (e.g., hiding when no active link and mouse leaves nav)
             highlighter.style.opacity = '0';
+        }
+
+        if (isInitialPageLoad) {
+            // Re-enable transition after the layout has settled (double rAF for robustness)
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => { 
+                    highlighter.classList.remove('no-transition');
+                    isInitialPageLoad = false; // Mark initial load as done
+                });
+            });
         }
     }
 
-    // --- Event Listeners for Dynamic Padding and Initial Highlighter Position ---
+    // --- Event Listeners ---
+    // Call setMainPadding and positionHighlighterOnActive on load and resize
     window.addEventListener('load', () => {
         setMainPadding(); 
         if (activeLink) {
-            moveHighlighter(activeLink); 
+            moveHighlighter(activeLink); // Position highlighter on active link on full load
         } else if (highlighter) {
-            highlighter.style.opacity = '0'; 
+            highlighter.style.opacity = '0'; // Hide if no active link
         }
     });
     document.addEventListener('DOMContentLoaded', () => {
         setMainPadding(); 
         if (activeLink) {
-            moveHighlighter(activeLink); 
+            moveHighlighter(activeLink); // Position highlighter on active link on DOM ready
         } else if (highlighter) {
-            highlighter.style.opacity = '0'; 
+            highlighter.style.opacity = '0'; // Hide if no active link
         }
     });
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             setMainPadding();
+            // On resize, if there's an active link, move highlighter smoothly (transition re-enabled after initial load)
             if (activeLink) { 
                 moveHighlighter(activeLink); 
             } else if (highlighter) {
@@ -66,7 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50); 
     });
 
-    setMainPadding(); 
+    // Initial calls when the script runs (for immediate setup before DOMContentLoaded/Load)
+    setMainPadding();
     if (activeLink) {
         moveHighlighter(activeLink);
     } else if (highlighter) {
@@ -74,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Original Auto-Hiding Header Effect ---
+    // --- Original Auto-Hiding Header Effect (keep as is) ---
     let lastScrollTop = 0;
     if (header) {
         window.addEventListener('scroll', () => {
@@ -93,23 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- RE-ENABLED: Hover for Navigation Links (Highlighter now moves on hover) ---
+    // --- Hover for Navigation Links (Highlighter moves on hover) ---
     if (nav && highlighter) { 
         links.forEach(link => {
             link.addEventListener('mouseenter', () => moveHighlighter(link));
         });
 
+        // When mouse leaves the entire nav, move highlighter back to active link or hide
         nav.addEventListener('mouseleave', () => {
             if (activeLink) {
-                moveHighlighter(activeLink); 
+                moveHighlighter(activeLink); // Move back to active link
             } else {
+                // If no active link, hide the highlighter completely
                 highlighter.style.opacity = '0';
             }
         });
     }
 
 
-    // --- Typewriter Effect (TEMPORARILY DISABLED) ---
+    // --- Original Typewriter Effect (still disabled for now) ---
     /*
     function typewriterEffect(element, speed = 50) {
         if (element.dataset.typed) {
@@ -145,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.classList.contains('reveal-on-scroll')) {
                     entry.target.classList.add('is-visible');
                 }
-                // TEMPORARILY DISABLED TYPEWRITER EFFECT:
+                // Typewriter effect remains disabled:
                 /*
                 if (entry.target.classList.contains('typewriter')) {
                     if (!entry.target.dataset.text) {
@@ -159,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Filter out .typewriter elements from observation temporarily
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); // Exclude .typewriter for now
     elementsToAnimate.forEach(el => {
         observer.observe(el);
