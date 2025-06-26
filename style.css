@@ -171,9 +171,9 @@ body {
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: flex-start; 
+    align-items: flex-start; /* Changed from center to flex-start to move content to top */
     text-align: center;
-    padding-top: 100px; 
+    padding-top: 100px; /* Keep this default padding */
 }
 
 .hero-content {
@@ -415,15 +415,9 @@ body {
     margin-right: auto;
 }
 
-.team-card .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.team-card .card-content { /* Added this for better organization */
+.team-card .card-content { 
     text-align: center;
-    flex-grow: 1; /* Allow content to take available space */
+    flex-grow: 1; 
 }
 
 .team-card .card-content .role {
@@ -443,7 +437,9 @@ body {
     font-size: 0.9rem;
     color: var(--accent-color);
     text-decoration: none;
-    transition: color 0.3s ease;
+    display: block; /* NEW: Make email link a block-level element */
+    margin-bottom: 5px; /* Add a small margin below the email before the button */
+    transition: color 0.3s ease; /* Keep transition for color change */
     word-break: break-all;
 }
 
@@ -492,9 +488,7 @@ body {
 }
 
 .about-me-section.expanded {
-    max-height: 300px; /* Adjust based on expected content height */
-    /* You might need to make this a very large value like 1000px if content varies greatly */
-    /* Alternatively, remove max-height and use display:block/none, but it's not animated then */
+    max-height: 500px; /* Increased from 300px for safety */
 }
 
 /* --- STYLES FOR TEAM CATEGORY HEADINGS --- */
