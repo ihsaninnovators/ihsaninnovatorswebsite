@@ -114,38 +114,38 @@ body {
 .main-nav ul li a {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
-    color: var(--secondary-text-color);
+    color: var(--secondary-text-color); /* Default text color */
     font-weight: 700;
     text-decoration: none;
     padding: 8px 18px; 
     border-radius: 999px;
-    transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Added transitions for active state */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transition for hover/active text glow */
     position: relative; 
-    z-index: 2;
+    z-index: 2; /* Ensures text is above highlighter */
     display: block;
 }
 
+/* MODIFIED: Hover effect - Text Glow only */
 .main-nav ul li a:hover {
-    color: var(--primary-text-color);
+    color: var(--primary-text-color); /* Brighten text on hover */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Subtle glow effect */
 }
 
+/* MODIFIED: Active link - no background, transform, or shadow. Highlighter handles the bubble. */
 .main-nav ul li a.active {
-    color: #FFFFFF;
-    background-color: var(--accent-color); /* Bubble background */
-    transform: scale(1.05); /* Slightly expand the bubble */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Subtle glow */
+    color: var(--primary-text-color); /* Active text color */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Text glow for active state */
 }
+
 
 .main-nav .highlighter {
     position: absolute;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); /* The blue bubble color */
     border-radius: 999px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smooth slide animation */
+    z-index: 1; /* Sits behind text */
+    opacity: 0; /* Initially hidden, made visible by JS for active/hover */
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the active bubble */
 }
 
 
