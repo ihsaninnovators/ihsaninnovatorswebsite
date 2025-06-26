@@ -131,10 +131,11 @@ body {
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Subtle glow effect */
 }
 
-/* MODIFIED: Active link - no background, transform, or shadow. Highlighter handles the bubble. */
+/* MODIFIED: Active link - Text Glow only, NO background, transform, or shadow. Highlighter handles the bubble. */
 .main-nav ul li a.active {
-    color: var(--primary-text-color); /* Active text color */
+    color: var(--primary-text-color); /* Active text color (bright) */
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Text glow for active state */
+    /* REMOVED: background-color, transform, box-shadow from here */
 }
 
 
@@ -144,7 +145,7 @@ body {
     border-radius: 999px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smooth slide animation */
     z-index: 1; /* Sits behind text */
-    opacity: 0; /* Initially hidden, made visible by JS for active/hover */
+    opacity: 0; /* Initially hidden, made visible by JS for active state ONLY */
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the active bubble */
 }
 
