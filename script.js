@@ -152,4 +152,26 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
+    // --- NEW: Expand/Collapse for Team Cards ---
+    const teamCards = document.querySelectorAll('.team-card');
+
+    teamCards.forEach(card => {
+        const moreButton = card.querySelector('.more-button');
+        const aboutSection = card.querySelector('.about-me-section');
+
+        if (moreButton && aboutSection) {
+            moreButton.addEventListener('click', () => {
+                // Toggle the 'expanded' class on the about section
+                aboutSection.classList.toggle('expanded');
+
+                // Change button text based on state
+                if (aboutSection.classList.contains('expanded')) {
+                    moreButton.textContent = 'Less';
+                } else {
+                    moreButton.textContent = 'More';
+                }
+            });
+        }
+    });
+
 });
