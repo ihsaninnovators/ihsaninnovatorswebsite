@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!entry.target.dataset.text) {
                        entry.target.dataset.text = entry.target.textContent;
                     }
-                    typewriterEffect(entry.target, 80); // Adjusted speed here from 30 to 80
+                    typewriterEffect(entry.target, 10); // Adjusted speed here from 80 to 10
                 }
                 observer.unobserve(entry.target);
             }
