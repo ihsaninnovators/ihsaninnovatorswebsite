@@ -571,7 +571,7 @@ body {
 
 @media (max-width: 600px) {
     .team-grid {
-        grid-template-columns: 1fr;
+        flex-direction: column; /* Force single column on smaller screens */
     }
     .contact-info-layout {
         flex-direction: column;
