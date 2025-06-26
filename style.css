@@ -553,6 +553,10 @@ body {
     margin-top: 5px;
 }
 
+.contact-block .email-link { /* NEW: A lighter shade of blue for contact emails */
+    color: #85C7F2; 
+}
+
 /* --- RESPONSIVE ADJUSTMENTS --- */
 @media (max-width: 1024px) {
     .sub-teams-layout {
