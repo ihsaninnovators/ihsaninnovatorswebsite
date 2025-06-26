@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.main-nav'); 
     const highlighter = nav ? nav.querySelector('.highlighter') : null; 
     const activeLink = nav ? nav.querySelector('a.active') : null; 
-    const links = nav ? nav.querySelectorAll('li a') : []; // Re-enabled links for hover control
+    const links = nav ? nav.querySelectorAll('li a') : []; 
 
     // --- Dynamic Header Padding Fix Function ---
     let resizeTimeout;
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Position Highlighter on Active Link or Hovered Link (Unified) ---
-    // This function now handles positioning the bubble for both active and hover states.
+    // This function handles positioning the bubble for both active and hover states.
     function moveHighlighter(targetLink) {
         if (!highlighter || !nav) return; // Ensure highlighter and nav exist
 
@@ -155,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 observer.unobserve(entry.target);
             }
-            // Removed: else { entry.target.classList.remove('is-visible'); } // Keep active on scroll
         });
     }, observerOptions);
 
