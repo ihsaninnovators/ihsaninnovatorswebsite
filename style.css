@@ -322,12 +322,6 @@ body {
     opacity: 0; 
 }
 
-.typing-effect::after {
-    content: '|';
-    color: var(--secondary-text-color);
-    animation: blink 1s step-end infinite;
-}
-
 @keyframes blink {
     from, to {
         opacity: 0;
