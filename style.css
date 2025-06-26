@@ -391,8 +391,8 @@ body {
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    display: flex; /* THIS IS THE CRUCIAL LINE */
-    flex-direction: column; /* THIS IS THE CRUCIAL LINE */
+    display: flex; 
+    flex-direction: column; 
     justify-content: center; 
     aspect-ratio: 1 / 1; 
     padding: 20px;
