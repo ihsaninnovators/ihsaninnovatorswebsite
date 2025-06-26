@@ -1,609 +1,167 @@
-/* CSS Variables for easy theme changes */
-:root {
-    --bg-color: #111111;
-    --surface-color: #1E1E1E;
-    --primary-text-color: #F0F0F0;
-    --secondary-text-color: #A0A0A0;
-    --accent-color: #007BFF;
-    --border-color: #333333;
-}
-
-/* Basic Reset and Global Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    background-color: #000000; 
-}
-
-body {
-    background-image: linear-gradient(to right, #1A1A1A, #000000); 
-    color: var(--primary-text-color);
-    font-family: 'Nunito Sans', sans-serif; 
-    overflow-x: hidden;
-    background-color: #000000; 
-}
-
-.container {
-    width: 95%;
-    max-width: 1280px;
-    margin: 0 auto;
-}
-
-/* --- HEADER --- */
-.main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 0;
-    z-index: 100;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-}
-
-.main-header.scrolled {
-    background-color: rgba(17, 17, 17, 0.95); 
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
-}
-
-.main-header.header-hidden {
-    transform: translateY(-100%);
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-header {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--primary-text-color);
-    text-decoration: none;
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
-}
-
-.logo-header .text-group { 
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    line-height: 1; 
-}
-
-.header-logo-img {
-    height: 40px;
-}
-
-.logo-header .text-group span:first-of-type { 
-    font-size: 1.5rem; 
-    font-weight: 700;
-    line-height: 1.2; 
-}
-
-.logo-header .team-number { 
-    font-size: 0.75rem; 
-    font-weight: 400; 
-    color: var(--secondary-text-color); 
-    margin-top: -5px; 
-}
-
-
-.main-nav ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    position: relative; 
-}
-
-.main-nav ul li {
-    margin: 0;
-}
-
-.main-nav ul li a {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 0.9rem;
-    color: var(--secondary-text-color); /* Default text color */
-    font-weight: 700;
-    text-decoration: none;
-    padding: 8px 18px; 
-    border-radius: 999px;
-    transition: color 0.3s ease, text-shadow 0.3s ease; /* Transition for hover/active text glow */
-    position: relative; 
-    z-index: 2; /* Ensures text is above highlighter */
-    display: block;
-}
-
-/* MODIFIED: Hover effect - Text Glow only */
-.main-nav ul li a:hover {
-    color: var(--primary-text-color); /* Brighten text on hover */
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Subtle glow effect */
-}
-
-/* MODIFIED: Active link - Text Glow only, NO background, transform, or shadow. Highlighter handles the bubble. */
-.main-nav ul li a.active {
-    color: var(--primary-text-color); /* Active text color (bright) */
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.7); /* Text glow for active state */
-}
-
-
-.main-nav .highlighter {
-    position: absolute;
-    background-color: var(--accent-color); /* The blue bubble color */
-    border-radius: 999px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smooth slide animation */
-    z-index: 1; /* Sits behind text */
-    opacity: 0; /* Initially hidden, made visible by JS for active state ONLY */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the active bubble */
-}
-
-/* REMOVED: .main-nav .highlighter.no-transition as it's no longer needed */
-
-
-/* --- HERO SECTION & GENERAL HEADINGS --- */
-.hero-content h1, .page-title-section h1, .grid-col-text h2, .service-card h3, .section-header h2, .team-card h3, .sub-team-item h2, .contact-block h2 {
-    font-family: 'Poppins', sans-serif;
-}
-
-.text-gradient {
-    background: linear-gradient(to bottom, #FFFFFF, #AAAAAA);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    color: var(--primary-text-color);
-}
-
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding-top: 100px; 
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-content h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.1;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    font-size: 1.25rem;
-    color: var(--secondary-text-color);
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    display: inline-block;
-    background: var(--accent-color);
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.25);
-}
-
-.learn-more-container {
-    text-align: center;
-    margin-top: 60px;
-}
-
-/* --- "WHAT WE DO" SECTION --- */
-.what-we-do {
-    padding: 100px 0;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.section-header p, .service-card p, .grid-col-text p, .page-title-section .subtitle, .hero-content p, .sub-teams-intro p, .sub-team-item p, .sub-team-item li, .contact-block p {
-    line-height: 1.8; 
-    font-weight: 400; 
-}
-
-
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.service-card {
-    background: var(--surface-color);
-    padding: 35px;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-color);
-}
-
-.service-card .icon {
-    font-size: 2.5rem;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-}
-
-.service-card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-}
-
-/* --- FOOTER --- */
-.main-footer {
-    padding: 50px 0;
-    text-align: center;
-    border-top: 1px solid var(--border-color);
-}
-
-.main-footer p {
-     color: var(--secondary-text-color);
-     line-height: 1.8;
-}
-.main-footer .email-link {
-    color: var(--primary-text-color);
-    text-decoration: underline;
-    transition: color 0.3s ease;
-}
-.main-footer .email-link:hover {
-    color: var(--primary-text-color);
-}
-
-.social-links {
-    margin-top: 20px;
-}
-
-.social-links a {
-    font-size: 1.8rem;
-    color: var(--secondary-text-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--accent-color);
-}
-
-.copyright-text {
-    margin-top: 30px;
-    padding-top: 30px;
-    border-top: 1px solid var(--border-color);
-    font-size: 0.85rem;
-    color: var(--secondary-text-color);
-    opacity: 0.8;
-}
-
-
-/* --- ANIMATION STYLES --- */
-.reveal-on-scroll {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.reveal-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.typewriter {
-    opacity: 0; 
-}
-
-@keyframes blink {
-    from, to {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-
-/* --- STYLES FOR ABOUT & GENERIC PAGES --- */
-.page-title-section {
-    padding: 140px 0 40px 0; 
-    text-align: center;
-}
-
-.page-title-section h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    line-height: 1.1;
-}
-
-.page-title-section .subtitle {
-    max-width: 800px;
-    margin: 20px auto 0 auto;
-    font-size: 1.1rem;
-    color: var(--secondary-text-color);
-}
-
-.content-section {
-    padding: 40px 0 80px 0; 
-}
-
-.grid-two-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-.grid-col-img img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    display: block;
-}
-
-.boxed-section {
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 50px;
-}
-
-/* --- STYLES FOR TEAM PAGE --- */
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.team-card {
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    aspect-ratio: 1 / 1; 
-    padding: 20px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.team-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent-color);
-}
-
-.team-card .card-image {
-    width: 180px; 
-    height: 180px;
-    border-radius: 8px; 
-    overflow: hidden;
-    background-color: var(--bg-color);
-    margin-bottom: 15px; 
-    margin-left: auto; 
-    margin-right: auto;
-}
-
-.team-card .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.team-card .card-content .role {
-    font-size: 0.9rem;
-    color: var(--secondary-text-color);
-    margin-bottom: 4px;
-}
-
-.team-card .card-content h3 {
-    font-size: 1.2rem;
-    color: var(--primary-text-color);
-    margin-bottom: 6px;
-    line-height: 1.2;
-}
-
-.team-card .card-content .email {
-    font-size: 0.9rem;
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    word-break: break-all;
-}
-
-.team-card .card-content .email:hover {
-    color: var(--primary-text-color);
-}
-
-/* --- STYLES FOR TEAM CATEGORY HEADINGS --- */
-.team-category-heading {
-    grid-column: 1 / -1; 
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    display: block; 
-    width: 100%; 
-}
-
-.team-category-heading h2 {
-    font-size: 2.5rem; 
-    color: var(--primary-text-color);
-    margin-bottom: 0;
-}
-
-
-/* --- STYLES FOR SUB-TEAMS PAGE --- */
-.sub-teams-section {
-    padding: 140px 0 80px 0;
-}
-
-.sub-teams-layout {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 80px;
-    align-items: start;
-}
-
-.sub-teams-intro h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    line-height: 1.1;
-    margin-bottom: 20px;
-}
-
-.sub-teams-intro p {
-    color: var(--secondary-text-color);
-}
-
-.sub-teams-intro .contact-button-container {
-    text-align: left; 
-    margin-top: 30px; 
-}
-
-
-.sub-team-item {
-    margin-bottom: 40px;
-    background-color: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 30px;
-}
-
-.sub-team-item:last-child {
-    margin-bottom: 0;
-}
-
-.sub-team-item h2 {
-    font-size: 1.8rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
-
-.sub-team-item p {
-    color: var(--secondary-text-color);
-    margin-bottom: 15px;
-}
-
-.sub-team-item ul {
-    list-style-position: outside;
-    padding-left: 20px;
-    color: var(--secondary-text-color);
-}
-
-.sub-team-item ul ul {
-    margin-top: 10px;
-}
-
-.sub-team-item li {
-    margin-bottom: 15px;
-}
-
-/* --- STYLES FOR CONTACT PAGE --- */
-.contact-info-layout {
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    text-align: center;
-}
-
-.contact-block h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.contact-block .secondary-text {
-    font-size: 0.9rem;
-    font-style: italic;
-    margin-top: 5px;
-}
-
-.contact-block .email-link { 
-    color: #85C7F2; 
-}
-
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 1024px) {
-    .sub-teams-layout {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 900px) {
-    .grid-two-cols {
-        grid-template-columns: 1fr;
-    }
-    .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .team-grid {
-        grid-template-columns: 1fr;
-    }
-    .contact-info-layout {
-        flex-direction: column;
-        gap: 40px;
+document.addEventListener('DOMContentLoaded', () => {
+
+    const header = document.getElementById('main-header');
+    const mainContent = document.querySelector('main'); 
+    const nav = document.querySelector('.main-nav'); 
+    const highlighter = nav ? nav.querySelector('.highlighter') : null; 
+    const activeLink = nav ? nav.querySelector('a.active') : null; 
+    const links = nav ? nav.querySelectorAll('li a') : []; // Re-enabled links for hover control
+
+    // --- Dynamic Header Padding Fix Function ---
+    let resizeTimeout;
+    function setMainPadding() {
+        if (header && mainContent) {
+            const headerHeight = header.offsetHeight; 
+            mainContent.style.paddingTop = `${headerHeight}px`;
+        }
     }
 
-    /* New/Adjusted Media Queries for Navigation */
-    .main-nav ul {
-        flex-direction: column; /* Stack navigation links vertically */
-        position: static; /* Remove absolute positioning */
-        width: 100%;
-        gap: 5px; /* Reduce gap between stacked links */
+    // --- Position Highlighter on Active Link or Hovered Link (Unified) ---
+    // This function now handles positioning the bubble for both active and hover states.
+    function moveHighlighter(targetLink) {
+        if (!highlighter || !nav) return; // Ensure highlighter and nav exist
+
+        if (targetLink) {
+            const linkRect = targetLink.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
+
+            highlighter.style.width = `${linkRect.width}px`;
+            highlighter.style.height = `${linkRect.height}px`;
+
+            const offsetLeft = linkRect.left - navRect.left;
+            const offsetTop = linkRect.top - navRect.top;
+
+            highlighter.style.transform = `translate(${offsetLeft}px, ${offsetTop}px)`;
+            highlighter.style.opacity = '1'; // Ensure highlighter is visible
+        } else {
+            // If no target (e.g., hiding when no active link and mouse leaves nav)
+            highlighter.style.opacity = '0';
+        }
     }
 
-    .main-nav ul li {
-        width: 100%;
-        text-align: center;
+    // --- Event Listeners for Dynamic Padding and Initial Highlighter Position ---
+    window.addEventListener('load', () => {
+        setMainPadding(); 
+        if (activeLink) {
+            moveHighlighter(activeLink); // Position highlighter on active link on full load
+        } else if (highlighter) {
+            highlighter.style.opacity = '0'; // Hide if no active link
+        }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        setMainPadding(); 
+        if (activeLink) {
+            moveHighlighter(activeLink); // Position highlighter on active link on DOM ready
+        } else if (highlighter) {
+            highlighter.style.opacity = '0'; // Hide if no active link
+        }
+    });
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            setMainPadding();
+            if (activeLink) { 
+                moveHighlighter(activeLink); 
+            } else if (highlighter) {
+                highlighter.style.opacity = '0';
+            }
+        }, 50); 
+    });
+
+    setMainPadding(); // Initial calls
+    if (activeLink) {
+        moveHighlighter(activeLink);
+    } else if (highlighter) {
+        highlighter.style.opacity = '0';
     }
 
-    .main-nav ul li a {
-        padding: 10px 0; /* Adjust vertical padding for stacked links */
-        width: 100%; /* Make links take full width */
+
+    // --- Original Auto-Hiding Header Effect (keep as is) ---
+    let lastScrollTop = 0;
+    if (header) {
+        window.addEventListener('scroll', () => {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            if (currentScrollTop > lastScrollTop && currentScrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+        });
     }
 
-    /* Hide highlighter on smaller screens if it causes issues */
-    .main-nav .highlighter {
-        display: none;
+    // --- RE-ENABLED: Hover for Navigation Links (Highlighter now moves on hover) ---
+    if (nav && highlighter) { // Only if nav and highlighter exist
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => moveHighlighter(link));
+        });
+
+        // When mouse leaves the entire nav, move highlighter back to active link or hide
+        nav.addEventListener('mouseleave', () => {
+            if (activeLink) {
+                moveHighlighter(activeLink); // Move back to active link
+            } else {
+                // If no active link, hide the highlighter completely
+                highlighter.style.opacity = '0';
+            }
+        });
     }
 
-    .nav-container {
-        flex-direction: column; /* Stack logo and nav vertically */
-        align-items: flex-start; /* Align to the left */
+
+    // --- Original Typewriter Effect (keep as is) ---
+    function typewriterEffect(element, speed = 50) {
+        if (element.dataset.typed) {
+            return;
+        }
+        const text = element.dataset.text;
+        element.textContent = '';
+        element.style.opacity = 1;
+        element.classList.add('typing-effect');
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(timer);
+                element.classList.remove('typing-effect');
+                element.dataset.typed = "true";
+            }
+        }, speed);
     }
-    
-    .logo-header {
-        margin-bottom: 15px; /* Space between logo group and nav */
-    }
-}
+
+    // --- Original Scroll-Reveal and Typewriter Animation Trigger (keep as is) ---
+    const observerOptions = {
+        root: null,
+        threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                if (entry.target.classList.contains('reveal-on-scroll')) {
+                    entry.target.classList.add('is-visible');
+                }
+                if (entry.target.classList.contains('typewriter')) {
+                    if (!entry.target.dataset.text) {
+                       entry.target.dataset.text = entry.target.textContent;
+                    }
+                    typewriterEffect(entry.target, 30);
+                }
+                observer.unobserve(entry.target);
+            }
+            // Removed: else { entry.target.classList.remove('is-visible'); } // Keep active on scroll
+        });
+    }, observerOptions);
+
+    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .typewriter');
+    elementsToAnimate.forEach(el => {
+        observer.observe(el);
+    });
+
+});
