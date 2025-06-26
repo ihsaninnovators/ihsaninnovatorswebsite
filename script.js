@@ -5,9 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.main-nav'); 
     const highlighter = nav ? nav.querySelector('.highlighter') : null; 
     const activeLink = nav ? nav.querySelector('a.active') : null; 
-
-    // Flag to ensure initial positioning is instant
-    let isInitialPageLoad = true;
+    // const links = nav ? nav.querySelectorAll('li a') : []; // Not used for hover movement
 
     // --- Dynamic Header Padding Fix Function ---
     let resizeTimeout;
@@ -18,14 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Position Highlighter ONLY on Active Link ---
-    // This function now handles making the initial positioning instant.
+    // --- Position Highlighter ONLY on Active Link (NOW WITH SLIDE ANIMATION ON LOAD) ---
     function positionHighlighterOnActive() {
-        if (!highlighter) return; // Ensure highlighter exists
-
-        if (isInitialPageLoad) {
-            highlighter.classList.add('no-transition'); // Temporarily disable transition
-        }
+        if (!highlighter) return; 
 
         if (activeLink) {
             const linkRect = activeLink.getBoundingClientRect();
@@ -38,46 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const offsetTop = linkRect.top - navRect.top;
 
             highlighter.style.transform = `translate(${offsetLeft}px, ${offsetTop}px)`;
-            highlighter.style.opacity = '1'; // Ensure highlighter is visible when active
+            highlighter.style.opacity = '1'; // Ensure highlighter is visible
         } else {
             // If no active link, hide the highlighter
             highlighter.style.opacity = '0';
         }
-
-        if (isInitialPageLoad) {
-            // Re-enable transition after the layout has settled (double rAF for robustness)
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => { 
-                    highlighter.classList.remove('no-transition');
-                    isInitialPageLoad = false; // Mark initial load as done
-                });
-            });
-        }
     }
 
-    // --- Event Listeners ---
-    // Call setMainPadding and positionHighlighterOnActive on load and resize
+    // --- Event Listeners for Dynamic Padding and Initial Highlighter Position ---
     window.addEventListener('load', () => {
         setMainPadding(); 
-        positionHighlighterOnActive(); 
+        positionHighlighterOnActive(); // Position highlighter on active link after everything loads
     });
-    document.addEventListener('DOMContentLoaded', () => {
-        setMainPadding(); 
-        positionHighlighterOnActive(); // Initial position set here immediately on DOM ready
-    });
+    document.addEventListener('DOMContentLoaded', setMainPadding); // For faster initial padding
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             setMainPadding();
-            // On resize, we want it to animate smoothly to the new position if it moves.
-            // isInitialPageLoad remains false after first load, so no-transition won't be added here.
-            positionHighlighterOnActive(); 
+            positionHighlighterOnActive(); // Reposition highlighter on active link after resize
         }, 50); 
     });
 
-    // Initial calls when the script runs
-    setMainPadding();
-    // positionHighlighterOnActive will be called on DOMContentLoaded, managing initialLoad.
+    setMainPadding(); // Initial calls
+    positionHighlighterOnActive(); // Initial calls
 
 
     // --- Original Auto-Hiding Header Effect (keep as is) ---
@@ -99,8 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- No JavaScript for Highlighter Hover Movement ---
-    // Hover text glow is handled purely by CSS.
+    // --- Hover for Navigation Links (Purely CSS for text glow; no JS for highlighter movement on hover) ---
+    // The previous mouseenter/mouseleave events for the highlighter are intentionally absent here.
+    // The highlighter is now controlled ONLY by the active state.
 
 
     // --- Original Typewriter Effect (keep as is) ---
