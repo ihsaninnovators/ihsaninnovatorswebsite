@@ -125,8 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Original Typewriter Effect (still disabled for now) ---
-    /*
+    // --- Typewriter Effect (RE-ENABLED) ---
     function typewriterEffect(element, speed = 50) {
         if (element.dataset.typed) {
             return;
@@ -147,9 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, speed);
     }
-    */
 
-    // --- Original Scroll-Reveal and Typewriter Animation Trigger ---
+    // --- Original Scroll-Reveal and Typewriter Animation Trigger (RE-ENABLED) ---
     const observerOptions = {
         root: null,
         threshold: 0.1,
@@ -161,21 +159,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.classList.contains('reveal-on-scroll')) {
                     entry.target.classList.add('is-visible');
                 }
-                // Typewriter effect remains disabled:
-                /*
+                // Typewriter effect re-enabled for elements with 'typewriter' class
                 if (entry.target.classList.contains('typewriter')) {
+                    // Store original text in data-text if not already there
                     if (!entry.target.dataset.text) {
                        entry.target.dataset.text = entry.target.textContent;
                     }
                     typewriterEffect(entry.target, 30);
                 }
-                */
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); 
+    // Observe both .reveal-on-scroll and .typewriter elements
+    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .typewriter'); 
     elementsToAnimate.forEach(el => {
         observer.observe(el);
     });
