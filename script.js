@@ -1,39 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Auto-Hiding Header Effect ---
     const header = document.getElementById('main-header');
-    let lastScrollTop = 0;
+    const mainContent = document.querySelector('main'); 
+    const nav = document.querySelector('.main-nav'); 
+    const highlighter = nav ? nav.querySelector('.highlighter') : null; 
+    const activeLink = nav ? nav.querySelector('a.active') : null; 
+    const links = nav ? nav.querySelectorAll('li a') : []; 
 
-    if (header) {
-        window.addEventListener('scroll', () => {
-            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (currentScrollTop > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-
-            if (currentScrollTop > lastScrollTop && currentScrollTop > header.offsetHeight) {
-                header.classList.add('header-hidden');
-            } else {
-                header.classList.remove('header-hidden');
-            }
-
-            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-        });
+    // --- Dynamic Header Padding Fix Function ---
+    let resizeTimeout;
+    function setMainPadding() {
+        if (header && mainContent) {
+            const headerHeight = header.offsetHeight; 
+            mainContent.style.paddingTop = `${headerHeight}px`;
+        }
     }
 
-    // --- 2. Sliding Nav Highlighter ---
-    const nav = document.querySelector('.main-nav');
-    if (nav) {
-        const highlighter = nav.querySelector('.highlighter');
-        const activeLink = nav.querySelector('a.active');
-        const links = nav.querySelectorAll('li a');
+    // --- Position Highlighter on Active Link or Hovered Link (Unified) ---
+    function moveHighlighter(targetLink) {
+        if (!highlighter || !nav) return; 
 
-        function moveHighlighter(targetLink) {
-            if (!targetLink || !highlighter) return;
-
+        if (targetLink) {
             const linkRect = targetLink.getBoundingClientRect();
             const navRect = nav.getBoundingClientRect();
 
@@ -44,37 +31,97 @@ document.addEventListener('DOMContentLoaded', () => {
             const offsetTop = linkRect.top - navRect.top;
 
             highlighter.style.transform = `translate(${offsetLeft}px, ${offsetTop}px)`;
+            highlighter.style.opacity = '1'; 
+        } else {
+            highlighter.style.opacity = '0';
         }
+    }
 
+    // --- Event Listeners for Dynamic Padding and Initial Highlighter Position ---
+    window.addEventListener('load', () => {
+        setMainPadding(); 
         if (activeLink) {
-           setTimeout(() => {
-                moveHighlighter(activeLink);
-           }, 100);
+            moveHighlighter(activeLink); 
+        } else if (highlighter) {
+            highlighter.style.opacity = '0'; 
         }
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        setMainPadding(); 
+        if (activeLink) {
+            moveHighlighter(activeLink); 
+        } else if (highlighter) {
+            highlighter.style.opacity = '0'; 
+        }
+    });
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            setMainPadding();
+            if (activeLink) { 
+                moveHighlighter(activeLink); 
+            } else if (highlighter) {
+                highlighter.style.opacity = '0';
+            }
+        }, 50); 
+    });
 
+    setMainPadding(); 
+    if (activeLink) {
+        moveHighlighter(activeLink);
+    } else if (highlighter) {
+        highlighter.style.opacity = '0';
+    }
+
+
+    // --- Original Auto-Hiding Header Effect ---
+    let lastScrollTop = 0;
+    if (header) {
+        window.addEventListener('scroll', () => {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            if (currentScrollTop > lastScrollTop && currentScrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+        });
+    }
+
+    // --- RE-ENABLED: Hover for Navigation Links (Highlighter now moves on hover) ---
+    if (nav && highlighter) { 
         links.forEach(link => {
             link.addEventListener('mouseenter', () => moveHighlighter(link));
         });
 
-        nav.addEventListener('mouseleave', () => moveHighlighter(activeLink));
+        nav.addEventListener('mouseleave', () => {
+            if (activeLink) {
+                moveHighlighter(activeLink); 
+            } else {
+                highlighter.style.opacity = '0';
+            }
+        });
     }
 
 
-    // --- 3. Typewriter Effect Function ---
+    // --- Original Typewriter Effect (keep as is) ---
     function typewriterEffect(element, speed = 50) {
         if (element.dataset.typed) {
             return;
         }
-
         const text = element.dataset.text;
-        element.textContent = '';
+        element.textContent = ''; 
         element.style.opacity = 1;
         element.classList.add('typing-effect');
         let i = 0;
-
         const timer = setInterval(() => {
             if (i < text.length) {
-                element.textContent += text.charAt(i);
+                element.textContent += text.charAt(i); 
                 i++;
             } else {
                 clearInterval(timer);
@@ -84,8 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, speed);
     }
 
-
-    // --- 4. Scroll-Reveal and Typewriter Animation Trigger ---
+    // --- Original Scroll-Reveal and Typewriter Animation Trigger (keep as is) ---
     const observerOptions = {
         root: null,
         threshold: 0.1,
@@ -97,14 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.classList.contains('reveal-on-scroll')) {
                     entry.target.classList.add('is-visible');
                 }
-
                 if (entry.target.classList.contains('typewriter')) {
                     if (!entry.target.dataset.text) {
                        entry.target.dataset.text = entry.target.textContent;
                     }
                     typewriterEffect(entry.target, 30);
                 }
-
                 observer.unobserve(entry.target);
             }
         });
