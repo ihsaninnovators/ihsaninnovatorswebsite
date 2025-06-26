@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Typewriter Effect (RE-ENABLED) ---
+    // --- Typewriter Effect (Speed Adjusted) ---
     function typewriterEffect(element, speed = 50) {
         if (element.dataset.typed) {
             return;
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, speed);
     }
 
-    // --- Original Scroll-Reveal and Typewriter Animation Trigger (RE-ENABLED) ---
+    // --- Original Scroll-Reveal and Typewriter Animation Trigger ---
     const observerOptions = {
         root: null,
         threshold: 0.1,
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!entry.target.dataset.text) {
                        entry.target.dataset.text = entry.target.textContent;
                     }
-                    typewriterEffect(entry.target, 30);
+                    typewriterEffect(entry.target, 80); // Adjusted speed here from 30 to 80
                 }
                 observer.unobserve(entry.target);
             }
