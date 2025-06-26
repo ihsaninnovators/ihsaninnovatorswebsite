@@ -148,10 +148,7 @@ body {
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the bubble */
 }
 
-/* NEW: Class to temporarily disable highlighter transition */
-.main-nav .highlighter.no-transition {
-    transition: none !important;
-}
+/* REMOVED: .main-nav .highlighter.no-transition as it's no longer needed for this exact behavior */
 
 
 /* --- HERO SECTION & GENERAL HEADINGS --- */
@@ -171,9 +168,9 @@ body {
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Changed from center to flex-start to move content to top */
     text-align: center;
-    padding-top: 100px; 
+    padding-top: 100px; /* Keep this default padding */
 }
 
 .hero-content {
