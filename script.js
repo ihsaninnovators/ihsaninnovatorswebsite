@@ -1,30 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const header = document.getElementById('main-header');
-    const mainContent = document.querySelector('main'); // Ensure this selects your <main> element
+    const mainContent = document.querySelector('main'); 
 
-    // --- NEW: Dynamic Header Padding Fix Function ---
+    // --- Dynamic Header Padding Fix Function ---
     let resizeTimeout;
     function setMainPadding() {
         if (header && mainContent) {
-            // Get the computed height of the fixed header
             const headerHeight = header.offsetHeight; 
-            // Apply this height as padding-top to the main content area
             mainContent.style.paddingTop = `${headerHeight}px`;
         }
     }
 
     // --- Event Listeners for Dynamic Padding ---
-    // 1. On initial load (ensures images/fonts in header are rendered)
     window.addEventListener('load', setMainPadding); 
-    // 2. On DOMContentLoaded (as a fallback, ensures basic DOM is ready)
     document.addEventListener('DOMContentLoaded', setMainPadding);
-    // 3. On window resize (with debounce for performance)
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(setMainPadding, 50); // Debounce to prevent rapid recalculations
+        resizeTimeout = setTimeout(setMainPadding, 50); 
     });
-    // 4. Also call it initially, in case 'load' fires after browser's internal rendering is complete
     setMainPadding();
 
     // --- Original Auto-Hiding Header Effect ---
@@ -49,11 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Original Sliding Nav Highlighter ---
+    // --- Sliding Nav Highlighter (MODIFIED for Hover Only) ---
     const nav = document.querySelector('.main-nav');
     if (nav) {
         const highlighter = nav.querySelector('.highlighter');
-        const activeLink = nav.querySelector('a.active');
+        const activeLink = nav.querySelector('a.active'); // Keep activeLink to preserve text color if needed, but highlighter won't go there by default now
         const links = nav.querySelectorAll('li a');
 
         function moveHighlighter(targetLink) {
@@ -71,17 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
             highlighter.style.transform = `translate(${offsetLeft}px, ${offsetTop}px)`;
         }
 
-        if (activeLink) {
-           setTimeout(() => {
-                moveHighlighter(activeLink);
-           }, 100);
-        }
+        // REMOVED: Initial setTimeout to move highlighter to activeLink on load
+        // This ensures the highlighter is initially invisible and only appears on hover.
 
         links.forEach(link => {
             link.addEventListener('mouseenter', () => moveHighlighter(link));
         });
 
-        nav.addEventListener('mouseleave', () => moveHighlighter(activeLink));
+        // MODIFIED: Make highlighter disappear completely on mouseleave
+        nav.addEventListener('mouseleave', () => {
+            highlighter.style.width = '0px';
+            highlighter.style.height = '0px';
+            highlighter.style.transform = 'translate(0px, 0px)'; // Reset position
+        });
     }
 
 
