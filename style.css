@@ -17,6 +17,8 @@
 
 html {
     scroll-behavior: smooth;
+    /* This ensures the very base background is black for overscroll */
+    background-color: #000000; 
 }
 
 body {
@@ -26,8 +28,8 @@ body {
     font-family: 'Nunito Sans', sans-serif; 
     overflow-x: hidden;
     
-    /* FIX FOR OVERSCROLL BOUNCE: Set a dark background-color */
-    background-color: #000000; /* Sets the color that shows on overscroll */
+    /* This sets the background color that shows on overscroll, matching html */
+    background-color: #000000; 
 }
 
 .container {
