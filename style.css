@@ -112,7 +112,7 @@ body {
     color: var(--secondary-text-color);
     font-weight: 700;
     text-decoration: none;
-    padding: 8px 18px;
+    padding: 8px 18px; /* Adjusted padding for links */
     border-radius: 999px;
     transition: color 0.3s ease;
     position: relative; 
@@ -126,6 +126,8 @@ body {
 
 .main-nav ul li a.active {
     color: #FFFFFF;
+    /* Removed background-color here, it will be handled by .highlighter */
+    /* Padding is now handled by the general 'a' rule */
 }
 
 .main-nav .highlighter {
@@ -134,6 +136,11 @@ body {
     border-radius: 999px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: 1;
+    /* Initial state, adjusted by JavaScript */
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
 }
 
 
@@ -561,5 +568,37 @@ body {
     .contact-info-layout {
         flex-direction: column;
         gap: 40px;
+    }
+
+    /* New/Adjusted Media Queries for Navigation */
+    .main-nav ul {
+        flex-direction: column; /* Stack navigation links vertically */
+        position: static; /* Remove absolute positioning */
+        width: 100%;
+        gap: 5px; /* Reduce gap between stacked links */
+    }
+
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav ul li a {
+        padding: 10px 0; /* Adjust vertical padding for stacked links */
+        width: 100%; /* Make links take full width */
+    }
+
+    /* Hide highlighter on smaller screens if it causes issues */
+    .main-nav .highlighter {
+        display: none;
+    }
+
+    .nav-container {
+        flex-direction: column; /* Stack logo and nav vertically */
+        align-items: flex-start; /* Align to the left */
+    }
+    
+    .logo-header {
+        margin-bottom: 15px; /* Space between logo group and nav */
     }
 }
