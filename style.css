@@ -25,6 +25,9 @@ body {
     color: var(--primary-text-color);
     font-family: 'Nunito Sans', sans-serif; 
     overflow-x: hidden;
+    
+    /* FIX FOR OVERSCROLL BOUNCE: Set a dark background-color */
+    background-color: #000000; /* Sets the color that shows on overscroll */
 }
 
 .container {
@@ -41,16 +44,16 @@ body {
     width: 100%;
     padding: 20px 0;
     z-index: 100;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease; /* Added border-bottom to transition */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle default shadow */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* NEW: Subtle white border always visible */
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
 }
 
 .main-header.scrolled {
-    background-color: rgba(17, 17, 17, 0.95); /* Slightly less transparent when scrolled */
+    background-color: rgba(17, 17, 17, 0.95); 
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* More prominent shadow when scrolled */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Slightly more visible border when scrolled */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
 }
 
 
