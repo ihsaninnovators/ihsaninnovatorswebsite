@@ -65,33 +65,33 @@ body {
     font-size: 1.5rem;
     color: var(--primary-text-color);
     text-decoration: none;
-    display: flex; /* Changed to flex (row is default) */
-    align-items: center; /* Aligns items vertically in the middle */
-    gap: 12px; /* Gap between the image and the text container */
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
 }
 
-.logo-header .text-group { /* NEW: A container for the name and number */
+.logo-header .text-group { 
     display: flex;
-    flex-direction: column; /* Stacks name and number vertically */
-    align-items: flex-start; /* Aligns text to the left within its group */
-    line-height: 1; /* Adjust for tight stacking */
+    flex-direction: column; 
+    align-items: flex-start; 
+    line-height: 1; 
 }
 
 .header-logo-img {
     height: 40px;
 }
 
-.logo-header .text-group span:first-of-type { /* Targets "Ihsan Innovators" */
+.logo-header .text-group span:first-of-type { 
     font-size: 1.5rem; 
     font-weight: 700;
-    line-height: 1.2; /* Adjust line height for the name */
+    line-height: 1.2; 
 }
 
-.logo-header .team-number { /* Style for the team number */
+.logo-header .team-number { 
     font-size: 0.75rem; 
     font-weight: 400; 
     color: var(--secondary-text-color); 
-    margin-top: -5px; /* Pull it slightly closer to the name */
+    margin-top: -5px; 
 }
 
 
@@ -112,7 +112,7 @@ body {
     color: var(--secondary-text-color);
     font-weight: 700;
     text-decoration: none;
-    padding: 8px 18px; /* Adjusted padding for links */
+    padding: 8px 18px; 
     border-radius: 999px;
     transition: color 0.3s ease;
     position: relative; 
@@ -126,8 +126,6 @@ body {
 
 .main-nav ul li a.active {
     color: #FFFFFF;
-    /* Removed background-color here, it will be handled by .highlighter */
-    /* Padding is now handled by the general 'a' rule */
 }
 
 .main-nav .highlighter {
@@ -136,7 +134,6 @@ body {
     border-radius: 999px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: 1;
-    /* Initial state, adjusted by JavaScript */
     top: 0;
     left: 0;
     width: 0;
@@ -163,7 +160,7 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 100px; /* Default for larger screens */
 }
 
 .hero-content {
@@ -335,7 +332,7 @@ body {
 
 /* --- STYLES FOR ABOUT & GENERIC PAGES --- */
 .page-title-section {
-    padding: 140px 0 40px 0; 
+    padding: 140px 0 40px 0; /* Default for larger screens */
     text-align: center;
 }
 
@@ -445,16 +442,16 @@ body {
 
 /* --- STYLES FOR TEAM CATEGORY HEADINGS --- */
 .team-category-heading {
-    grid-column: 1 / -1; /* Ensures the heading spans all columns */
+    grid-column: 1 / -1; 
     text-align: center;
     margin-top: 40px;
     margin-bottom: 20px;
-    display: block; /* Ensures it behaves as a block element */
-    width: 100%; /* Ensures it takes full width */
+    display: block; 
+    width: 100%; 
 }
 
 .team-category-heading h2 {
-    font-size: 2.5rem; /* Increased font size for category titles */
+    font-size: 2.5rem; 
     color: var(--primary-text-color);
     margin-bottom: 0;
 }
@@ -483,8 +480,8 @@ body {
 }
 
 .sub-teams-intro .contact-button-container {
-    text-align: left; /* Aligns the button to the left */
-    margin-top: 30px; /* Adds some space between paragraph and button */
+    text-align: left; 
+    margin-top: 30px; 
 }
 
 
@@ -600,5 +597,13 @@ body {
     
     .logo-header {
         margin-bottom: 15px; /* Space between logo group and nav */
+    }
+
+    /* FIX FOR HEADER OVERLAP ON MOBILE */
+    .hero {
+        padding-top: 180px; /* Increased padding to push content down */
+    }
+    .page-title-section {
+        padding-top: 180px; /* Increased padding for other pages too */
     }
 }
