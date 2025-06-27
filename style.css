@@ -17,11 +17,11 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: #000000;
+    background-color: #1A1A1A; /* Changed for overscroll color */
 }
 
 body {
-    background-image: linear-gradient(to right, #1A1A1A, #000000); 
+    background-color: #1A1A1A; /* Set to the lighter solid color */
     color: var(--primary-text-color);
     font-family: 'Nunito Sans', sans-serif; 
     overflow-x: hidden;
@@ -654,6 +654,7 @@ div.service-card:hover {
 
 
 /* --- STYLES FOR EXPANDABLE TEAM CARD --- */
+
 .team-card .more-button {
     display: block;
     margin-left: auto;
@@ -681,7 +682,7 @@ div.service-card:hover {
     transition: max-height 1s ease-in-out, padding 0.5s ease;
 }
 
-/* --- NEW FADE-IN ANIMATION --- */
+/* --- FADE-IN REVEAL ANIMATION --- */
 .animated-heading span,
 .animated-subheading span {
     display: block; /* Make each line its own block */
