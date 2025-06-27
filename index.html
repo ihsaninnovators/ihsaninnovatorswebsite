@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- This is the line to change -->
     <title>Ihsan Innovators</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
@@ -15,8 +14,7 @@
     <script src="https://unpkg.com/phosphor-icons"></script> 
 </head>
 <body>
-    
-    <!-- Canvas for Matter.js Physics Simulation -->
+
     <canvas id="physics-canvas"></canvas>
 
     <header class="main-header" id="main-header">
@@ -35,25 +33,23 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="team.html">Our Team</a></li>
                     <li><a href="sub-teams.html">Sub-Teams</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+            <div class="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
         </div>
     </header>
 
     <main>
         <section class="hero" id="home">
             <div class="container hero-content">
-                <!-- Restructured H1 for line-by-line animation -->
-                <h1 class="text-gradient animated-heading">
-                    <span class="line-1">Empowering the Youth</span>
-                    <span class="line-2">Through Technology</span>
-                </h1>
-                <!-- Restructured paragraph for line-by-line animation -->
-                <p class="animated-subheading">
-                    <span class="line-1">We build, we code, we innovate.</span>
-                    <span class="line-2">Training the next generation of leaders in design, programming, and outreach.</span>
-                </p> 
+                <h1 class="text-gradient reveal-on-scroll">Empowering the Youth Through Technology</h1>
+                <p class="reveal-on-scroll">We build, we code, we innovate. Training the next generation of leaders in design, programming, and outreach.</p> 
                 <a href="#services" class="cta-button reveal-on-scroll">See What We Do</a>
             </div>
         </section>
@@ -108,22 +104,19 @@
         </div>
     </footer>
 
-    <!-- Matter.js library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
-    
-    <!-- Main site script -->
+
     <script src="script.js"></script>
 
-    <!-- Inline script for Physics Simulation -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Matter.js Physics Simulation ---
             const canvas = document.getElementById('physics-canvas');
+            if (!canvas) return;
             const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint, Composite } = Matter;
 
             const engine = Engine.create();
             const world = engine.world;
-            
+
             const render = Render.create({
                 canvas: canvas,
                 engine: engine,
@@ -135,7 +128,6 @@
                 }
             });
 
-            // --- Create Boundaries ---
             const wallOptions = {
                 isStatic: true,
                 render: { visible: false } 
@@ -146,7 +138,6 @@
             const rightWall = Bodies.rectangle(window.innerWidth + 25, window.innerHeight / 2, 50, window.innerHeight, wallOptions);
             World.add(world, [ground, ceiling, leftWall, rightWall]);
 
-            // --- Create Objects ---
             const objectSize = 20;
             const objectColor = 'rgba(255, 255, 255, 0.1)';
             const stack = Matter.Composites.stack(50, 50, 20, 15, 10, 10, (x, y) => {
@@ -159,7 +150,6 @@
             });
             World.add(world, stack);
 
-            // --- Mouse Control ---
             const mouse = Mouse.create(render.canvas);
             const mouseConstraint = MouseConstraint.create(engine, {
                 mouse: mouse,
@@ -173,18 +163,15 @@
             World.add(world, mouseConstraint);
             render.mouse = mouse;
 
-            // --- Run Simulation ---
             Render.run(render);
             const runner = Runner.create();
             Runner.run(runner, engine);
 
-            // --- Responsiveness ---
             window.addEventListener('resize', () => {
                 render.canvas.width = window.innerWidth;
                 render.canvas.height = window.innerHeight;
                 Render.setPixelRatio(render, window.devicePixelRatio);
-                
-                // Update wall positions
+
                 Matter.Body.setPosition(ground, { x: window.innerWidth / 2, y: window.innerHeight + 25 });
                 Matter.Body.setPosition(ceiling, { x: window.innerWidth / 2, y: -25 });
                 Matter.Body.setPosition(leftWall, { x: -25, y: window.innerHeight / 2 });
