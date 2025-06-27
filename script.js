@@ -54,43 +54,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Event Listeners for Dynamic Padding and Initial Highlighter Position ---
-    window.addEventListener('load', () => {
-        setMainPadding(); 
+    // Combined multiple listeners into one for efficiency
+    const initializeLayout = () => {
+        setMainPadding();
         if (activeLink) {
-            moveHighlighter(activeLink); 
+            moveHighlighter(activeLink);
         } else if (highlighter) {
-            highlighter.style.opacity = '0'; 
+            highlighter.style.opacity = '0';
         }
-    });
-    document.addEventListener('DOMContentLoaded', () => {
-        setMainPadding(); 
-        if (activeLink) {
-            moveHighlighter(activeLink); 
-        } else if (highlighter) {
-            highlighter.style.opacity = '0'; 
-        }
-    });
+    };
+    
+    window.addEventListener('load', initializeLayout);
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            setMainPadding();
-            if (activeLink) { 
-                moveHighlighter(activeLink); 
-            } else if (highlighter) {
-                highlighter.style.opacity = '0';
-            }
-        }, 50); 
+        resizeTimeout = setTimeout(initializeLayout, 50); 
     });
+    initializeLayout(); // Initial call
 
-    setMainPadding(); 
-    if (activeLink) {
-        moveHighlighter(activeLink);
-    } else if (highlighter) {
-        highlighter.style.opacity = '0';
-    }
-
-
-    // --- Original Auto-Hiding Header Effect ---
+    // --- Auto-Hiding Header Effect ---
     let lastScrollTop = 0;
     if (header) {
         window.addEventListener('scroll', () => {
@@ -106,10 +87,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 header.classList.remove('header-hidden');
             }
             lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-        });
+        }, { passive: true });
     }
 
-    // --- RE-ENABLED: Hover for Navigation Links (Highlighter now moves on hover) ---
+    // --- Navigation Highlighter Hover Effect ---
     if (nav && highlighter) { 
         links.forEach(link => {
             link.addEventListener('mouseenter', () => moveHighlighter(link));
@@ -123,12 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // --- Typewriter Effect (PERMANENTLY REMOVED) ---
-    // The typewriterEffect function definition is removed.
-    // The observation for .typewriter elements is removed.
     
-    // --- Original Scroll-Reveal Animation Trigger (Modified to exclude typewriter) ---
+    // --- Scroll-Reveal Animation Trigger ---
     const observerOptions = {
         root: null,
         threshold: 0.1,
@@ -137,22 +114,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                if (entry.target.classList.contains('reveal-on-scroll')) {
-                    entry.target.classList.add('is-visible');
-                }
-                // Removed condition and call for 'typewriter' elements
+                entry.target.classList.add('is-visible');
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe only .reveal-on-scroll elements (includes paragraphs previously with typewriter)
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); 
     elementsToAnimate.forEach(el => {
         observer.observe(el);
     });
 
-    // --- NEW: Expand/Collapse for Team Cards ---
+    // --- Expand/Collapse for Team Cards ---
     const teamCards = document.querySelectorAll('.team-card');
 
     teamCards.forEach(card => {
@@ -161,10 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (moreButton && aboutSection) {
             moreButton.addEventListener('click', () => {
-                // Toggle the 'expanded' class on the about section
                 aboutSection.classList.toggle('expanded');
-
-                // Change button text based on state
+                
                 if (aboutSection.classList.contains('expanded')) {
                     moreButton.textContent = 'Less';
                 } else {
