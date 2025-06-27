@@ -1,5 +1,7 @@
+// This function runs only after the entire HTML document has been loaded and parsed.
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Header and Navigation Elements ---
     const header = document.getElementById('main-header');
     const mainContent = document.querySelector('main'); 
     const nav = document.querySelector('.main-nav'); 
@@ -7,11 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeLink = nav ? nav.querySelector('a.active') : null; 
     const links = nav ? nav.querySelectorAll('li a') : []; 
 
-    // Flag to ensure initial positioning is instant
     let isInitialPageLoad = true; 
 
-    // --- Dynamic Header Padding Fix Function ---
-    let resizeTimeout;
+    // --- Dynamic Header Padding ---
     function setMainPadding() {
         if (header && mainContent) {
             const headerHeight = header.offsetHeight; 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Position Highlighter on Active Link or Hovered Link ---
+    // --- Navigation Highlighter Logic ---
     function moveHighlighter(targetLink) {
         if (!highlighter || !nav) return; 
 
@@ -45,16 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isInitialPageLoad) {
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => { 
-                    highlighter.classList.remove('no-transition');
-                    isInitialPageLoad = false; 
-                });
+                highlighter.classList.remove('no-transition');
+                isInitialPageLoad = false; 
             });
         }
     }
 
-    // --- Event Listeners for Dynamic Padding and Initial Highlighter Position ---
-    // Combined multiple listeners into one for efficiency
+    // Initialize layout and highlighter on page load and resize
     const initializeLayout = () => {
         setMainPadding();
         if (activeLink) {
@@ -65,10 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     
     window.addEventListener('load', initializeLayout);
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(initializeLayout, 50); 
-    });
+    window.addEventListener('resize', initializeLayout);
     initializeLayout(); // Initial call
 
     // --- Auto-Hiding Header Effect ---
@@ -87,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 header.classList.remove('header-hidden');
             }
             lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-        }, { passive: true });
+        });
     }
 
     // --- Navigation Highlighter Hover Effect ---
@@ -105,30 +99,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // --- Scroll-Reveal Animation Trigger ---
-    const observerOptions = {
-        root: null,
-        threshold: 0.1,
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
+    // --- Scroll-Reveal Animation ---
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); 
-    elementsToAnimate.forEach(el => {
-        observer.observe(el);
-    });
+    elementsToAnimate.forEach(el => observer.observe(el));
 
     // --- Expand/Collapse for Team Cards ---
     const teamCards = document.querySelectorAll('.team-card');
 
-    teamCards.forEach(card => {
+    teamCards.forEach((card, index) => {
         const moreButton = card.querySelector('.more-button');
         const aboutSection = card.querySelector('.about-me-section');
 
