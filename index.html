@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
     <link href="style.css" rel="stylesheet" type="text/css" />
-    <script src="script.js"></script>
     <link rel="icon" type="image/png" href="images/favicon.png">
     <script src="https://unpkg.com/phosphor-icons"></script> 
 </head>
@@ -42,7 +41,9 @@
         <section class="hero" id="home">
             <div class="container hero-content">
                 <h1 class="text-gradient reveal-on-scroll">Empowering the Youth Through Technology</h1>
-                <p class="reveal-on-scroll">We build, we code, we innovate. Training the next generation of leaders in design, programming, and outreach.</p> <a href="#services" class="cta-button reveal-on-scroll">See What We Do</a>
+                <!-- Added 'typewriter' class and removed 'reveal-on-scroll' to prevent conflicts -->
+                <p class="typewriter">We build, we code, we innovate. Training the next generation of leaders in design, programming, and outreach.</p> 
+                <a href="#services" class="cta-button reveal-on-scroll">See What We Do</a>
             </div>
         </section>
 
@@ -99,4 +100,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
