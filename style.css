@@ -154,7 +154,7 @@ p {
 
 
 /* --- HERO SECTION & GENERAL HEADINGS --- */
-.hero-content h1, .page-title-section h1, .grid-col-text h2, .service-card h3, .section-header h2, .team-card h3, .sub-team-item h2, .contact-block h2 {
+.hero-content h1, .page-title-section h1, .grid-col-text h2, .service-card h3, .section-header h2, .team-card h3, .sub-team-item h2, .contact-block h2, .about-title h1 {
     font-family: 'Poppins', sans-serif;
 }
 
@@ -234,7 +234,7 @@ button.cta-button:hover {
     margin-bottom: 10px;
 }
 
-.section-header p, .service-card p, .grid-col-text p, .page-title-section .subtitle, .hero-content p, .sub-teams-intro p, .sub-team-item p, .sub-team-item li, .contact-block p {
+.section-header p, .service-card p, .grid-col-text p, .page-title-section .subtitle, .hero-content p, .sub-teams-intro p, .sub-team-item p, .sub-team-item li, .contact-block p, .about-text-box p {
     line-height: 1.8; 
     font-weight: 400; 
 }
@@ -341,6 +341,36 @@ button.cta-button:hover {
 .page-title-section .subtitle {
     max-width: 800px;
     margin: 20px auto 0 auto;
+    font-size: 1.1rem;
+    color: var(--secondary-text-color);
+}
+
+/* New layout for the main About Us section */
+.about-section {
+    padding-top: 100px; /* Add padding to push content down from header */
+}
+.about-layout {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 60px 0;
+}
+.about-title {
+    flex: 1;
+    text-align: left;
+}
+.about-title h1 {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    line-height: 1;
+}
+.about-text-box {
+    flex: 1.2;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px;
+}
+.about-text-box p {
     font-size: 1.1rem;
     color: var(--secondary-text-color);
 }
@@ -560,6 +590,14 @@ button.cta-button:hover {
     }
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .about-layout {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    .about-title {
+        text-align: center;
     }
 }
 
