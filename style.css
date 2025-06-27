@@ -125,16 +125,12 @@ body {
     display: block;
 }
 
-/* REVERTED: Hover effect - Highlighter now provides background */
 .main-nav ul li a:hover {
     color: var(--primary-text-color); /* Text brighter on hover */
-    text-shadow: none; /* Removed text-shadow */
 }
 
-/* REVERTED: Active link - Highlighter now provides background */
 .main-nav ul li a.active {
     color: #FFFFFF; /* Text white when active */
-    text-shadow: none; /* Removed text-shadow */
 }
 
 
@@ -148,7 +144,6 @@ body {
     box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the bubble */
 }
 
-/* NEW: Class to temporarily disable highlighter transition */
 .main-nav .highlighter.no-transition {
     transition: none !important;
 }
@@ -171,9 +166,9 @@ body {
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: flex-start; /* Changed from center to flex-start to move content to top */
+    align-items: flex-start;
     text-align: center;
-    padding-top: 100px; /* Keep this default padding */
+    padding-top: 100px;
 }
 
 .hero-content {
@@ -203,7 +198,6 @@ body {
     font-weight: 600;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    /* Added for button element compatibility */
     border: none;
     cursor: pointer;
 }
@@ -326,20 +320,6 @@ body {
     transform: translateY(0);
 }
 
-.typewriter {
-    opacity: 0; 
-}
-
-@keyframes blink {
-    from, to {
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-
 /* --- STYLES FOR ABOUT & GENERIC PAGES --- */
 .page-title-section {
     padding: 140px 0 40px 0; 
@@ -396,9 +376,7 @@ body {
     border-radius: 12px;
     display: flex; 
     flex-direction: column; 
-    /* Changed from justify-content center to start */
     justify-content: flex-start; 
-    /* Removed aspect-ratio to allow card to grow */
     padding: 20px;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -417,7 +395,6 @@ body {
     margin-bottom: 15px; 
     margin-left: auto; 
     margin-right: auto;
-    /* Added flex-shrink to prevent image from shrinking */
     flex-shrink: 0;
 }
 
@@ -457,7 +434,6 @@ body {
     color: var(--primary-text-color);
 }
 
-/* --- STYLES FOR TEAM CATEGORY HEADINGS --- */
 .team-category-heading {
     grid-column: 1 / -1; 
     text-align: center;
@@ -581,14 +557,13 @@ body {
 
 @media (max-width: 600px) {
     .team-grid {
-        flex-direction: column; 
+        grid-template-columns: 1fr; 
     }
     .contact-info-layout {
         flex-direction: column;
         gap: 40px;
     }
 
-    /* New/Adjusted Media Queries for Navigation */
     .main-nav ul {
         flex-direction: column; 
         position: static; 
@@ -606,7 +581,6 @@ body {
         width: 100%; 
     }
 
-    /* Hide highlighter on smaller screens if it causes issues */
     .main-nav .highlighter {
         display: none;
     }
@@ -626,11 +600,13 @@ body {
 
 /* Style for the "More" button */
 .team-card .more-button {
-    padding: 8px 20px; /* Smaller padding than main CTA buttons */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 20px;
     font-size: 0.9rem;
     margin-top: 15px;
     width: auto;
-    display: inline-block;
 }
 
 /* Initially hide the "About Me" section */
@@ -638,7 +614,7 @@ body {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s cubic-bezier(0, 1, 0, 1), padding 0.5s ease;
-    padding: 0 20px; /* Add horizontal padding but no vertical */
+    padding: 0 20px;
     text-align: left;
     color: var(--secondary-text-color);
     font-size: 0.9rem;
@@ -647,17 +623,7 @@ body {
 
 /* Style for the "About Me" section when it's expanded */
 .team-card .about-me-section.expanded {
-    max-height: 500px; /* A large enough value to show all content */
-    padding: 20px 20px; /* Add vertical padding when expanded */
+    max-height: 500px;
+    padding: 20px 20px;
     transition: max-height 1s ease-in-out, padding 0.5s ease;
-
-.team-card .more-button {
-    display: block; /* Makes the button take up its own line */
-    margin-left: auto; /* Centers the button horizontally */
-    margin-right: auto; /* Centers the button horizontally */
-    padding: 8px 20px;
-    font-size: 0.9rem;
-    margin-top: 15px; /* Adds space above the button */
-    width: auto;
 }
-
