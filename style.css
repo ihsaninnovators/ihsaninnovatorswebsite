@@ -38,6 +38,17 @@ p {
     margin: 0 auto;
 }
 
+/* --- PHYSICS CANVAS STYLES --- */
+#physics-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place it behind all other content */
+    pointer-events: none; /* Allows clicks to go through to content */
+}
+
 /* --- HEADER --- */
 .main-header {
     position: fixed;
@@ -643,7 +654,6 @@ div.service-card:hover {
 
 
 /* --- STYLES FOR EXPANDABLE TEAM CARD --- */
-
 .team-card .more-button {
     display: block;
     margin-left: auto;
@@ -671,21 +681,44 @@ div.service-card:hover {
     transition: max-height 1s ease-in-out, padding 0.5s ease;
 }
 
-/* --- FADE-IN REVEAL ANIMATION --- */
-.typewriter {
+/* --- NEW FADE-IN ANIMATION --- */
+.animated-heading span,
+.animated-subheading span {
+    display: block; /* Make each line its own block */
     opacity: 0;
-}
-.typewriter.is-visible {
-    animation: fadeInReveal 2s ease-out forwards;
+    animation: fadeUpIn 1s ease-out forwards;
 }
 
-@keyframes fadeInReveal {
+.animated-heading .line-2 {
+    animation-delay: 0.4s; /* Second line of heading appears later */
+}
+
+.animated-subheading {
+    /* Delay the start of the subheading animation */
+    animation: fadeInDelay 1s forwards;
+    opacity: 0; /* Keep it hidden until the delay is over */
+}
+
+.animated-subheading .line-1 {
+    animation-delay: 1s; /* Start after heading is mostly done */
+}
+.animated-subheading .line-2 {
+    animation-delay: 1.4s; /* A bit after the first subheading line */
+}
+
+@keyframes fadeInDelay {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUpIn {
     from {
         opacity: 0;
-        clip-path: inset(0 100% 0 0);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
-        clip-path: inset(0 0 0 0);
+        transform: translateY(0);
     }
 }
