@@ -14,6 +14,9 @@
     <script src="https://unpkg.com/phosphor-icons"></script> 
 </head>
 <body>
+    
+    <!-- Canvas for Matter.js Physics Simulation -->
+    <canvas id="physics-canvas"></canvas>
 
     <header class="main-header" id="main-header">
         <div class="container nav-container">
@@ -40,9 +43,16 @@
     <main>
         <section class="hero" id="home">
             <div class="container hero-content">
-                <h1 class="text-gradient reveal-on-scroll">Empowering the Youth Through Technology</h1>
-                <!-- Added 'typewriter' class and removed 'reveal-on-scroll' to prevent conflicts -->
-                <p class="typewriter">We build, we code, we innovate. Training the next generation of leaders in design, programming, and outreach.</p> 
+                <!-- Restructured H1 for line-by-line animation -->
+                <h1 class="text-gradient animated-heading">
+                    <span class="line-1">Empowering the Youth</span>
+                    <span class="line-2">Through Technology</span>
+                </h1>
+                <!-- Restructured paragraph for line-by-line animation -->
+                <p class="animated-subheading">
+                    <span class="line-1">We build, we code, we innovate.</span>
+                    <span class="line-2">Training the next generation of leaders in design, programming, and outreach.</span>
+                </p> 
                 <a href="#services" class="cta-button reveal-on-scroll">See What We Do</a>
             </div>
         </section>
@@ -97,6 +107,89 @@
         </div>
     </footer>
 
+    <!-- Matter.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+    
+    <!-- Main site script -->
     <script src="script.js"></script>
+
+    <!-- Inline script for Physics Simulation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Matter.js Physics Simulation ---
+            const canvas = document.getElementById('physics-canvas');
+            const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint, Composite } = Matter;
+
+            const engine = Engine.create();
+            const world = engine.world;
+            
+            const render = Render.create({
+                canvas: canvas,
+                engine: engine,
+                options: {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                    wireframes: false,
+                    background: 'transparent',
+                }
+            });
+
+            // --- Create Boundaries ---
+            const wallOptions = {
+                isStatic: true,
+                render: { visible: false } 
+            };
+            const ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 25, window.innerWidth, 50, wallOptions);
+            const ceiling = Bodies.rectangle(window.innerWidth / 2, -25, window.innerWidth, 50, wallOptions);
+            const leftWall = Bodies.rectangle(-25, window.innerHeight / 2, 50, window.innerHeight, wallOptions);
+            const rightWall = Bodies.rectangle(window.innerWidth + 25, window.innerHeight / 2, 50, window.innerHeight, wallOptions);
+            World.add(world, [ground, ceiling, leftWall, rightWall]);
+
+            // --- Create Objects ---
+            const objectSize = 20;
+            const objectColor = 'rgba(255, 255, 255, 0.1)';
+            const stack = Matter.Composites.stack(50, 50, 20, 15, 10, 10, (x, y) => {
+                return Bodies.rectangle(x, y, objectSize, objectSize, {
+                    render: {
+                        fillStyle: objectColor,
+                        strokeStyle: 'transparent'
+                    }
+                });
+            });
+            World.add(world, stack);
+
+            // --- Mouse Control ---
+            const mouse = Mouse.create(render.canvas);
+            const mouseConstraint = MouseConstraint.create(engine, {
+                mouse: mouse,
+                constraint: {
+                    stiffness: 0.2,
+                    render: {
+                        visible: false
+                    }
+                }
+            });
+            World.add(world, mouseConstraint);
+            render.mouse = mouse;
+
+            // --- Run Simulation ---
+            Render.run(render);
+            const runner = Runner.create();
+            Runner.run(runner, engine);
+
+            // --- Responsiveness ---
+            window.addEventListener('resize', () => {
+                render.canvas.width = window.innerWidth;
+                render.canvas.height = window.innerHeight;
+                Render.setPixelRatio(render, window.devicePixelRatio);
+                
+                // Update wall positions
+                Matter.Body.setPosition(ground, { x: window.innerWidth / 2, y: window.innerHeight + 25 });
+                Matter.Body.setPosition(ceiling, { x: window.innerWidth / 2, y: -25 });
+                Matter.Body.setPosition(leftWall, { x: -25, y: window.innerHeight / 2 });
+                Matter.Body.setPosition(rightWall, { x: window.innerWidth + 25, y: window.innerHeight / 2 });
+            });
+        });
+    </script>
 </body>
 </html>
