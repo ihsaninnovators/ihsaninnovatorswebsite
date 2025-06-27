@@ -368,6 +368,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    align-items: start; /* THIS IS THE FIX */
 }
 
 .team-card {
@@ -598,7 +599,6 @@ body {
 
 /* --- STYLES FOR EXPANDABLE TEAM CARD --- */
 
-/* Style for the "More" button */
 .team-card .more-button {
     display: block;
     margin-left: auto;
@@ -609,7 +609,6 @@ body {
     width: auto;
 }
 
-/* Initially hide the "About Me" section */
 .team-card .about-me-section {
     max-height: 0;
     overflow: hidden;
@@ -621,7 +620,6 @@ body {
     line-height: 1.6;
 }
 
-/* Style for the "About Me" section when it's expanded */
 .team-card .about-me-section.expanded {
     max-height: 500px;
     padding: 20px 20px;
