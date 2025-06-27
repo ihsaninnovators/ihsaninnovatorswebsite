@@ -100,22 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // --- Scroll-Reveal Animation ---
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+                revealObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
 
     const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); 
-    elementsToAnimate.forEach(el => observer.observe(el));
+    elementsToAnimate.forEach(el => revealObserver.observe(el));
 
     // --- Expand/Collapse for Team Cards ---
     const teamCards = document.querySelectorAll('.team-card');
 
-    teamCards.forEach((card, index) => {
+    teamCards.forEach(card => {
         const moreButton = card.querySelector('.more-button');
         const aboutSection = card.querySelector('.about-me-section');
 
@@ -132,4 +132,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- NEW: Typewriter Effect ---
+    const typewriterElement = document.querySelector('.typewriter');
+
+    if (typewriterElement) {
+        const textToType = typewriterElement.textContent.trim();
+        typewriterElement.textContent = ''; // Clear the text initially
+
+        const typewriterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+
+                    let i = 0;
+                    const cursor = document.createElement('span');
+                    cursor.className = 'typewriter-cursor';
+                    entry.target.appendChild(cursor);
+
+                    function type() {
+                        if (i < textToType.length) {
+                            cursor.before(textToType.charAt(i));
+                            i++;
+                            setTimeout(type, 40); // Typing speed in milliseconds
+                        } else {
+                            cursor.remove(); // Remove cursor when typing is done
+                        }
+                    }
+                    type();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.6 }); // Start when 60% of the element is visible
+
+        typewriterObserver.observe(typewriterElement);
+    }
 });
