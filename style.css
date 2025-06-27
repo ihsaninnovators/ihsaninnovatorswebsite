@@ -6,9 +6,11 @@
     --secondary-text-color: #A0A0A0;
     --accent-color: #007BFF;
     --border-color: #333333;
+    --nav-mobile-width: 280px;
+    --transition-speed: 0.3s;
 }
 
-/* Basic Reset and Global Styles */ 
+/* Basic Reset and Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -17,33 +19,30 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: #1A1A1A; /* Changed for overscroll color */
+    background-color: #1A1A1A;
 }
 
 body {
-    background-color: #1A1A1A; /* Set to the lighter solid color */
+    background-color: #1A1A1A;
     color: var(--primary-text-color);
     font-family: 'Nunito Sans', sans-serif; 
     overflow-x: hidden;
-    /* New styles for sticky footer */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* New rule to make main content expand */
 main {
     flex-grow: 1;
 }
 
-/* Apply system font stack to paragraphs for SF font on Apple devices */
 p {
-    font-family: "Arial Rounded MT Bold", "Arial Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 .container {
-    width: 95%;
-    max-width: 1280px;
+    width: 98%;
+    max-width: 1440px;
     margin: 0 auto;
 }
 
@@ -54,8 +53,8 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Place it behind all other content */
-    pointer-events: none; /* Allows clicks to go through to content */
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* --- HEADER --- */
@@ -107,7 +106,7 @@ p {
 }
 
 .header-logo-img {
-    height: 40px;
+    height: 50px;
 }
 
 .logo-header .text-group span:first-of-type { 
@@ -129,6 +128,7 @@ p {
     align-items: center;
     list-style: none;
     position: relative; 
+    flex-direction: row; 
 }
 
 .main-nav ul li {
@@ -138,52 +138,85 @@ p {
 .main-nav ul li a {
     font-family: 'Nunito Sans', sans-serif;
     font-size: 0.9rem;
-    color: var(--secondary-text-color); /* Default text color */
+    color: var(--secondary-text-color);
     font-weight: 700;
     text-decoration: none;
-    padding: 8px 18px; 
+    padding: 8px 18px;
     border-radius: 999px;
-    transition: color 0.3s ease; /* Only text color transition */
+    transition: color 0.3s ease;
     position: relative; 
-    z-index: 2; /* Ensures text is above highlighter */
-    display: block;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+    text-align: center;
 }
 
 .main-nav ul li a:hover {
-    color: var(--primary-text-color); /* Text brighter on hover */
+    color: var(--primary-text-color);
 }
 
 .main-nav ul li a.active {
-    color: #FFFFFF; /* Text white when active */
+    color: #FFFFFF;
 }
 
 
 .main-nav .highlighter {
     position: absolute;
-    background-color: var(--accent-color); /* The blue bubble color */
+    background-color: var(--accent-color);
     border-radius: 999px;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smooth slide animation */
-    z-index: 1; /* Sits behind text */
-    opacity: 1; /* Initially visible (or set by JS) */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4); /* Glow for the bubble */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+    opacity: 1;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
 }
 
 .main-nav .highlighter.no-transition {
     transition: none !important;
 }
 
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 101;
+    transition: transform var(--transition-speed) ease-in-out;
+}
+
+.hamburger-menu .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-text-color);
+    border-radius: 2px;
+    transition: all var(--transition-speed) ease-in-out;
+}
+
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
 
 /* --- HERO SECTION & GENERAL HEADINGS --- */
-.hero-content h1, .page-title-section h1, .grid-col-text h2, .service-card h3, .section-header h2, .team-card h3, .sub-team-item h2, .contact-block h2, .about-title h1 {
+.hero-content h1, .page-title-section h1, .grid-col-text h2, .service-card h3, .section-header h2, .team-card h3, .sub-team-item h2, .contact-block h2, .about-title h1, .year-label {
     font-family: 'Poppins', sans-serif;
 }
 
 .text-gradient {
-    background: linear-gradient(to bottom, #FFFFFF, #AAAAAA);
+    background: linear-gradient(90deg, #FFFFFF, #B0B0B0);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
-    color: var(--primary-text-color);
+    -webkit-text-fill-color: transparent;
 }
 
 
@@ -202,8 +235,9 @@ p {
 
 .hero-content h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.1;
+    line-height: 1.2; 
     margin-bottom: 20px;
+    padding-bottom: 0.1em; 
 }
 
 .hero-content p {
@@ -212,7 +246,6 @@ p {
     margin-bottom: 30px;
 }
 
-/* Corrected CTA Button Styles for Specificity */
 a.cta-button,
 button.cta-button {
     display: inline-block;
@@ -254,7 +287,7 @@ button.cta-button:hover {
     margin-bottom: 10px;
 }
 
-.section-header p, .service-card p, .grid-col-text p, .page-title-section .subtitle, .hero-content p, .sub-teams-intro p, .sub-team-item p, .sub-team-item li, .contact-block p, .about-text-box p {
+.section-header p, .service-card p, .grid-col-text p, .page-title-section .subtitle, .hero-content p, .sub-teams-intro p, .sub-team-item p, .sub-team-item li, .contact-block p, .about-text-box p, .event-description p {
     line-height: 1.8; 
     font-weight: 400; 
 }
@@ -367,7 +400,7 @@ div.service-card:hover {
 
 /* New layout for the main About Us section */
 .about-section {
-    padding-top: 100px; /* Add padding to push content down from header */
+    padding-top: 100px;
 }
 .about-layout {
     display: flex;
@@ -377,7 +410,7 @@ div.service-card:hover {
 }
 .about-title {
     flex: 1;
-    text-align: left;
+    text-align: center; /* Centered the title */
 }
 .about-title h1 {
     font-size: clamp(3.5rem, 8vw, 6rem);
@@ -417,7 +450,9 @@ div.service-card:hover {
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 50px;
+    padding: 20px;
+    max-width: 1000px; 
+    margin: 0 auto;
 }
 
 /* --- STYLES FOR TEAM PAGE --- */
@@ -445,22 +480,19 @@ div.service-card:hover {
 }
 
 .team-card .card-image {
-    width: 180px; 
-    height: 180px;
+    width: 100%;
+    height: 200px;
     border-radius: 8px; 
     overflow: hidden;
     background-color: var(--bg-color);
     margin-bottom: 15px; 
-    margin-left: auto; 
-    margin-right: auto;
-    flex-shrink: 0;
 }
 
 .team-card .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center; 
+    object-position: center;
 }
 
 .team-card .card-content {
@@ -597,73 +629,101 @@ div.service-card:hover {
     color: #85C7F2; 
 }
 
-/* --- RESPONSIVE ADJUSTMENTS --- */
-@media (max-width: 1024px) {
-    .sub-teams-layout {
-        grid-template-columns: 1fr;
-    }
+/* --- TIMELINE STYLES --- */
+
+.timeline-vertical-wrapper {
+    /* This is intentionally left blank to allow for natural block flow. */
 }
 
-@media (max-width: 900px) {
-    .grid-two-cols {
-        grid-template-columns: 1fr;
-    }
-    .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .about-layout {
-        flex-direction: column;
-        text-align: center;
-        gap: 40px;
-    }
-    .about-title {
-        text-align: center;
-    }
+.timeline-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px; 
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
-@media (max-width: 600px) {
-    .team-grid {
-        grid-template-columns: 1fr; 
-    }
-    .contact-info-layout {
-        flex-direction: column;
-        gap: 40px;
-    }
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
 
-    .main-nav ul {
-        flex-direction: column; 
-        position: static; 
-        width: 100%;
-        gap: 5px; 
-    }
+.timeline-entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    flex-shrink: 0; 
+}
 
-    .main-nav ul li {
-        width: 100%;
-        text-align: center;
-    }
+.timeline-infobox {
+    width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-    .main-nav ul li a {
-        padding: 10px 0; 
-        width: 100%; 
-    }
+.infobox-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 0;
+}
 
-    .main-nav .highlighter {
-        display: none;
-    }
+.timeline-year, .year-separator, .percentage-meter {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
 
-    .nav-container {
-        flex-direction: column; 
-        align-items: flex-start; 
-    }
-    
-    .logo-header {
-        margin-bottom: 15px; 
-    }
+.timeline-year { color: var(--primary-text-color); }
+.year-separator { color: var(--secondary-text-color); }
+.percentage-meter {
+    background: linear-gradient(90deg, #e74c3c 0%, #e67e22 25%, #f1c40f 50%, #b8e994 75%, #2ecc71 100%);
+    background-size: 400% 100%;
+    background-position: 100% 0%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.timeline-description {
+    width: 500px;
+    padding: 20px;
+    margin: 0;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-description ul {
+    list-style-position: inside;
+    padding-left: 0;
+}
+.timeline-description li {
+    margin-bottom: 10px;
 }
 
 
 /* --- STYLES FOR EXPANDABLE TEAM CARD --- */
-
 .team-card .more-button {
     display: block;
     margin-left: auto;
@@ -691,44 +751,130 @@ div.service-card:hover {
     transition: max-height 1s ease-in-out, padding 0.5s ease;
 }
 
-/* --- FADE-IN REVEAL ANIMATION --- */
-.animated-heading span,
-.animated-subheading span {
-    display: block; /* Make each line its own block */
-    opacity: 0;
-    animation: fadeUpIn 1s ease-out forwards;
+/* --- ROLE COLOR CODING --- */
+.role-mechanical {
+    color: #FFA500;
+    font-weight: 700;
+}
+.role-programming {
+    color: #008CFF;
+    font-weight: 700;
+}
+.role-business {
+    color: #28a745;
+    font-weight: 700;
 }
 
-.animated-heading .line-2 {
-    animation-delay: 0.4s; /* Second line of heading appears later */
-}
-
-.animated-subheading {
-    /* Delay the start of the subheading animation */
-    animation: fadeInDelay 1s forwards;
-    opacity: 0; /* Keep it hidden until the delay is over */
-}
-
-.animated-subheading .line-1 {
-    animation-delay: 1s; /* Start after heading is mostly done */
-}
-.animated-subheading .line-2 {
-    animation-delay: 1.4s; /* A bit after the first subheading line */
-}
-
-@keyframes fadeInDelay {
-    to {
-        opacity: 1;
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 1024px) {
+    .sub-teams-layout {
+        grid-template-columns: 1fr;
     }
 }
 
-@keyframes fadeUpIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+@media (max-width: 900px) {
+    .main-header {
+        padding: 15px 0;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .nav-container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
     }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: var(--nav-mobile-width);
+        height: 100vh;
+        background-color: rgba(30, 30, 30, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+        transition: right var(--transition-speed) ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .main-nav.open {
+        right: 0;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+        position: static;
+        align-items: center;
+    }
+
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav ul li a {
+        padding: 12px 0;
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    .main-nav .highlighter {
+        display: none;
+    }
+
+    .grid-two-cols {
+        grid-template-columns: 1fr;
+    }
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .about-layout {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    .about-title {
+        text-align: center;
+    }
+    .timeline-item {
+       flex-direction: column;
+       align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    /* No specific overrides needed here for now */
+}
+
+
+@media (max-width: 600px) {
+    .team-grid {
+        grid-template-columns: 1fr; 
+    }
+    .contact-info-layout {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .boxed-section {
+        padding: 15px;
+    }
+}
+
+/* Specific position fixes for team photos */
+#ammaar-card .card-image img {
+    object-position: center 20%;
+}
+#aayan-card .card-image img {
+    object-position: center 70%;
 }
