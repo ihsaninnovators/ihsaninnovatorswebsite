@@ -650,4 +650,14 @@ body {
     max-height: 500px; /* A large enough value to show all content */
     padding: 20px 20px; /* Add vertical padding when expanded */
     transition: max-height 1s ease-in-out, padding 0.5s ease;
+
+.team-card .more-button {
+    display: block; /* Makes the button take up its own line */
+    margin-left: auto; /* Centers the button horizontally */
+    margin-right: auto; /* Centers the button horizontally */
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    margin-top: 15px; /* Adds space above the button */
+    width: auto;
 }
+
