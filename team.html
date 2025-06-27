@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team | Ihsan Innovators</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="images/favicon.png">
-    <!-- This script loads the icon library -->
     <script src="https://unpkg.com/phosphor-icons"></script>
 </head>
 <body>
@@ -32,9 +31,15 @@
                     <li><a href="about.html">About</a></li>
                     <li><a href="team.html" class="active">Our Team</a></li>
                     <li><a href="sub-teams.html">Sub-Teams</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+            <div class="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
         </div>
     </header>
 
@@ -42,23 +47,23 @@
         <section class="page-title-section">
             <div class="container">
                 <h1 class="text-gradient reveal-on-scroll">Our Team</h1>
-                <p class="subtitle reveal-on-scroll">Meet our core team, where passion meets expertise. Our dedicated captains are here to guide the team through everything.</p>
+                <p class="subtitle reveal-on-scroll">Meet our core team, where passion meets expertise. Our dedicated captains, coaches, and mentors are here to guide the team through everything.</p>
             </div>
         </section>
 
         <section class="content-section">
             <div class="container">
                 <div class="team-grid">
-                    <div class="team-category-heading">
+                    <div class="team-category-heading reveal-on-scroll">
                         <h2 class="text-gradient">Captains</h2>
                     </div>
-                    
+
                     <div class="team-card reveal-on-scroll">
                         <div class="card-image">
                             <img src="images/nyelimage.jpg" alt="Nyel Umair"> 
                         </div>
                         <div class="card-content">
-                            <p class="role">Mechanical Captain, Business Lead</p>
+                            <p class="role"><span class="role-mechanical">Mechanical</span> Captain, <span class="role-business">Business</span> Lead</p>
                             <h3>Nyel Umair</h3>
                             <a href="mailto:nyel.umair@gmail.com" class="email">nyel.umair@gmail.com</a>
                             <button class="cta-button more-button">More</button>
@@ -67,12 +72,12 @@
                             <p>Nyel is passionate about robotics and business, driving both the mechanical design and strategic aspects of the team. With a keen eye for innovation, he ensures our projects are both technically sound and financially viable.</p>
                         </div>
                     </div>
-                    <div class="team-card reveal-on-scroll">
+                    <div id="aayan-card" class="team-card reveal-on-scroll">
                         <div class="card-image">
                             <img src="images/aayanimage.jpg" alt="Aayan Jafri">
                         </div>
                         <div class="card-content">
-                            <p class="role">Mechanical Captain, Business Lead</p>
+                            <p class="role"><span class="role-mechanical">Mechanical</span> Captain, <span class="role-business">Business</span> Lead</p>
                             <h3>Aayan Jafri</h3>
                             <a href="mailto:aayanjafri73@gmail.com" class="email">aayanjafri73@gmail.com</a>
                             <button class="cta-button more-button">More</button>
@@ -81,12 +86,12 @@
                             <p>Aayan combines mechanical expertise with strong leadership in business, ensuring efficient operations and outreach. His dedication helps streamline our project management and external communications.</p>
                         </div>
                     </div>
-                    <div class="team-card reveal-on-scroll">
+                    <div id="ammaar-card" class="team-card reveal-on-scroll">
                         <div class="card-image">
                             <img src="images/ammaarimage.png" alt="Ammaar Ishtiaq"> 
                         </div>
                         <div class="card-content">
-                            <p class="role">CAD Captain</p>
+                            <p class="role"><span class="role-mechanical">CAD</span> Captain</p>
                             <h3>Ammaar Ishtiaq</h3>
                             <a href="mailto:ammaar2027@gmail.com" class="email">ammaar2027@gmail.com</a>
                             <button class="cta-button more-button">More</button>
@@ -100,7 +105,7 @@
                             <img src="images/umairimage.jpg" alt="Umair Shaheen">
                         </div>
                         <div class="card-content">
-                            <p class="role">Programming Captain</p>
+                            <p class="role"><span class="role-programming">Programming</span> Captain</p>
                             <h3>Umair Shaheen</h3>
                             <a href="mailto:umairshaheen7@gmail.com" class="email">umairshaheen7@gmail.com</a>
                             <button class="cta-button more-button">More</button>
@@ -114,7 +119,7 @@
                             <img src="images/amaarimage.jpeg" alt="Amaar Chughtai">
                         </div>
                         <div class="card-content">
-                            <p class="role">Programming Captain</p>
+                            <p class="role"><span class="role-programming">Programming</span> Captain</p>
                             <h3>Amaar Chughtai</h3>
                             <a href="mailto:amaardevx@gmail.com" class="email">amaardevx@gmail.com</a>
                             <button class="cta-button more-button">More</button>
@@ -123,17 +128,16 @@
                             <p>Amaar is a key programming captain, ensuring our software is robust and error-free. He focuses on innovative coding solutions and plays a significant role in debugging and optimizing our robot's performance.</p>
                         </div>
                     </div>
-
-                    <div class="team-category-heading">
+                    
+                    <div class="team-category-heading reveal-on-scroll">
                         <h2 class="text-gradient">Mentors & Coaches</h2>
                     </div>
-
                     <div class="team-card reveal-on-scroll">
                         <div class="card-image">
                             <img src="images/logo.png" alt="Adnan Jafri"> 
                         </div>
                         <div class="card-content">
-                            <p class="role">Lead Coach</p>
+                            <p class="role">Lead Coach <span class="role-mechanical">Mechanical</span></p>
                             <h3>Adnan Jafri</h3>
                             <a href="mailto:ajafri73@yahoo.com" class="email">ajafri73@yahoo.com</a>
                             <button class="cta-button more-button">More</button>
@@ -158,19 +162,20 @@
                     </div>
                     <div class="team-card reveal-on-scroll">
                         <div class="card-image">
-                            <img src="images/logo.png" alt="Shaheen Fareed"> 
+                            <img src="images/logo.png" alt="Fareed Shaheen"> 
                         </div>
                         <div class="card-content">
-                            <p class="role">Lead Coach Programming</p>
-                            <h3>Shaheen Fareed</h3>
-                            <a href="mailto:shaheen.fareed@example.com" class="email">shaheen.fareed@example.com</a>
+                            <p class="role">Lead Coach <span class="role-programming">Programming</span></p>
+                            <h3>Fareed Shaheen</h3>
+                            <a href="mailto:fareed.shaheen@example.com" class="email">fareed.shaheen@example.com</a>
                             <button class="cta-button more-button">More</button>
                         </div>
                         <div class="about-me-section">
-                            <p>Shaheen is our Lead Coach for Programming, guiding the software development team through advanced concepts and efficient coding practices. His expertise ensures our robot's intelligence and functionality are cutting-edge.</p>
+                            <p>Fareed is our Lead Coach for Programming, guiding the software development team through advanced concepts and efficient coding practices. His expertise ensures our robot's intelligence and functionality are cutting-edge.</p>
                         </div>
                     </div>
-                    <div class="team-category-heading">
+
+                    <div class="team-category-heading reveal-on-scroll">
                         <h2 class="text-gradient">Admin</h2>
                     </div>
                     <div class="team-card reveal-on-scroll">
@@ -186,6 +191,62 @@
                         <div class="about-me-section">
                            <p>Muhammad handles the administrative backbone of Ihsan Innovators, ensuring smooth operations, effective communication, and efficient resource management for the entire team.</p>
                         </div>
+                    </div>
+
+                    <div class="team-category-heading reveal-on-scroll">
+                        <h2 class="text-gradient">Team Members</h2>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Aahil Ahmed"></div>
+                        <div class="card-content"><p class="role"><span class="role-mechanical">Mechanical</span></p><h3>Aahil Ahmed</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Arham Qidwai"></div>
+                        <div class="card-content"><p class="role"><span class="role-mechanical">Mechanical</span></p><h3>Arham Qidwai</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Noah Shaltout"></div>
+                        <div class="card-content"><p class="role"><span class="role-programming">Programming</span></p><h3>Noah Shaltout</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Haniya Khan"></div>
+                        <div class="card-content"><p class="role"><span class="role-programming">Programming</span></p><h3>Haniya Khan</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Ilyas Amin"></div>
+                        <div class="card-content"><p class="role"><span class="role-programming">Programming</span></p><h3>Ilyas Amin</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Adil Khan"></div>
+                        <div class="card-content"><p class="role"><span class="role-programming">Programming</span></p><h3>Adil Khan</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Hamza Farrukh"></div>
+                        <div class="card-content"><p class="role"><span class="role-programming">Programming</span></p><h3>Hamza Farrukh</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Zeeshan Hussain"></div>
+                        <div class="card-content"><p class="role"><span class="role-programming">Programming</span></p><h3>Zeeshan Hussain</h3></div>
+                    </div>
+                     <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Rayyan Nazirudeen"></div>
+                        <div class="card-content"><p class="role"><span class="role-programming">Programming</span></p><h3>Rayyan Nazirudeen</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Inaya Tahir"></div>
+                        <div class="card-content"><p class="role"><span class="role-business">Business/Outreach</span></p><h3>Inaya Tahir</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Omer Yusuf"></div>
+                        <div class="card-content"><p class="role"><span class="role-business">Business/Outreach</span></p><h3>Omer Yusuf</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Bilal Yusuf"></div>
+                        <div class="card-content"><p class="role"><span class="role-business">Business/Outreach</span></p><h3>Bilal Yusuf</h3></div>
+                    </div>
+                    <div class="team-card reveal-on-scroll">
+                        <div class="card-image"><img src="images/logo.png" alt="Emaad Umair"></div>
+                        <div class="card-content"><p class="role"><span class="role-business">Business/Outreach</span></p><h3>Emaad Umair</h3></div>
                     </div>
 
                 </div>
@@ -209,5 +270,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
