@@ -671,28 +671,21 @@ div.service-card:hover {
     transition: max-height 1s ease-in-out, padding 0.5s ease;
 }
 
-/* --- TYPEWRITER STYLES --- */
+/* --- FADE-IN REVEAL ANIMATION --- */
 .typewriter {
-    opacity: 0; /* Hidden until observer makes it visible */
-    transition: opacity 1s ease;
+    opacity: 0;
 }
-
 .typewriter.is-visible {
-    opacity: 1;
+    animation: fadeInReveal 2s ease-out forwards;
 }
 
-.typewriter-cursor {
-    display: inline-block;
-    background-color: var(--secondary-text-color);
-    margin-left: 3px;
-    width: 2px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0% { background-color: var(--secondary-text-color); }
-    49% { background-color: var(--secondary-text-color); }
-    50% { background-color: transparent; }
-    99% { background-color: transparent; }
-    100% { background-color: var(--secondary-text-color); }
+@keyframes fadeInReveal {
+    from {
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
 }
