@@ -188,7 +188,9 @@ body {
     margin-bottom: 30px;
 }
 
-.cta-button {
+/* Corrected CTA Button Styles for Specificity */
+a.cta-button,
+button.cta-button {
     display: inline-block;
     background: var(--accent-color);
     color: #fff;
@@ -202,7 +204,8 @@ body {
     cursor: pointer;
 }
 
-.cta-button:hover {
+a.cta-button:hover,
+button.cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 123, 255, 0.25);
 }
