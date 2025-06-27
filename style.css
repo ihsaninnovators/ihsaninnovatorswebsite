@@ -5,6 +5,7 @@
     --primary-text-color: #F0F0F0;
     --secondary-text-color: #A0A0A0;
     --accent-color: #007BFF;
+    --accent-color-hover: #0056b3; /* Added for hover effect */
     --border-color: #333333;
 }
 
@@ -197,7 +198,7 @@ body {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; 
     border: none;
     cursor: pointer;
 }
@@ -205,6 +206,7 @@ body {
 .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 123, 255, 0.25);
+    background-color: var(--accent-color-hover);
 }
 
 .learn-more-container {
