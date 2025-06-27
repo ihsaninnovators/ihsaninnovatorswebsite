@@ -153,7 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (i < textToType.length) {
                             cursor.before(textToType.charAt(i));
                             i++;
-                            setTimeout(type, 40); // Typing speed in milliseconds
+                            // Changed timeout from 40 to 25 to make it faster
+                            setTimeout(type, 25); 
                         } else {
                             cursor.remove(); // Remove cursor when typing is done
                         }
