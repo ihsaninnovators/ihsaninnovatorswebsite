@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // --- Scroll-Reveal and Fade-In Animation Trigger ---
+    // --- Scroll-Reveal Animation Trigger ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -107,10 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2 }); // Trigger when 20% of the element is visible
+    }, { threshold: 0.2 });
 
-    // Observe all elements that need to be revealed on scroll
-    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll, .typewriter'); 
+    const elementsToAnimate = document.querySelectorAll('.reveal-on-scroll'); 
     elementsToAnimate.forEach(el => observer.observe(el));
 
     // --- Expand/Collapse for Team Cards ---
