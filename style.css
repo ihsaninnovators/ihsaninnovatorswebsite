@@ -68,6 +68,9 @@ p {
 }
 
 /* --- HEADER --- */
+/* --- HEADER --- */
+/* --- HEADER --- */
+/* --- HEADER --- */
 .main-header {
     position: fixed;
     top: 0;
@@ -75,9 +78,32 @@ p {
     width: 100%;
     padding: 20px 0;
     z-index: 100;
+    background: linear-gradient(180deg, #292929, #000000); /* More contrasty black gradient (from dark gray to pure black) */
     transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-header.scrolled {
+    background-color: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-header.scrolled {
+    background-color: rgba(17, 17, 17, 0.95); /* This will still apply, potentially adding a slight opacity change and blur */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.main-header.scrolled {
+    background-color: rgba(17, 17, 17, 0.95); /* This will make it slightly less opaque and a tiny bit lighter if scrolled */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
 }
 
 .main-header.scrolled {
