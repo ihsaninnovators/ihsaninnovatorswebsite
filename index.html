@@ -1,158 +1,207 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ihsan Innovators</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <script src="https://unpkg.com/phosphor-icons"></script> 
-</head>
-<body>
-    <canvas id="physics-canvas"></canvas>
-    <header class="main-header" id="main-header">
-        <div class="container nav-container">
-            <a href="index.html" class="logo-header">
-                <img src="images/logo.png" alt="Ihsan Innovators Logo" class="header-logo-img">
-                <div class="text-group">
-                    <span>Ihsan Innovators</span>
-                    <span class="team-number">#30695</span>
-                </div>
-            </a>
-            <nav class="main-nav">
-                <ul>
-                    <li class="highlighter"></li>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="team.html">Our Team</a></li>
-                    <li><a href="sub-teams.html">Sub-Teams</a></li>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="hamburger-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section class="hero" id="home">
-            <div class="container hero-content">
-                <h1 class="text-gradient reveal-on-scroll">Empowering the Youth<br>Through Technology</h1>
-                <p class="reveal-on-scroll">We build, we code, we innovate. Training the next generation of leaders in design, programming, and outreach.</p> 
-                <a href="#services" class="cta-button reveal-on-scroll">See What We Do</a>
-            </div>
-        </section>
-        <section class="what-we-do" id="services">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="text-gradient reveal-on-scroll">What We Do</h2>
-                    <p class="reveal-on-scroll">Our work is divided into four key areas, each providing unique skills and opportunities for growth and community impact.</p>
-                </div>
-                <div class="services-grid">
-                    <div class="service-card reveal-on-scroll">
-                        <i class="ph-gear-six icon"></i> 
-                        <h3>Mechanical Design</h3>
-                        <p>Custom design FTC robots from the ground up. We master advanced CAD software like SolidWorks to engineer and build robots to compete for each season's game.</p>
-                    </div>
-                    <div class="service-card reveal-on-scroll">
-                        <i class="ph-code icon"></i> 
-                        <h3>Coding & Programming</h3>
-                        <p>Empower robots with precision and control through months of coding, training members to develop software that enables autonomous operations and human control, both required for each season's game.</p>
-                    </div>
-                    <div class="service-card reveal-on-scroll">
-                        <i class="ph-chart-line-up icon"></i> 
-                        <h3>Business & Marketing</h3>
-                        <p>Equip members with the skills needed to manage funds and raise funds. Through strategic marketing strategies, we build strong connections and ensure our team's continued growth and overall impact.</p>
-                    </div>
-                    <div class="service-card reveal-on-scroll">
-                        <i class="ph-users-three icon"></i> 
-                        <h3>Outreach Programs</h3>
-                        <p>Engage in community projects that make a difference, especially those benefiting our local mosque, while showcasing your skills and contributing to a greater cause.</p>
-                    </div>
-                </div>
-                <div class="learn-more-container reveal-on-scroll">
-                    <a href="sub-teams.html" class="cta-button">Learn More</a>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="main-footer" id="contact">
-        <div class="container">
-            <p>2486 Ruby Avenue, San Jose, CA</p>
-            <p>Have any questions? <a href="mailto:ihsaninnovators@gmail.com" class="email-link">ihsaninnovators@gmail.com</a></p>
-            <div class="social-links">
-                <a href="https://www.instagram.com/ihsan_innovators/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
-                    <i class="ph-instagram-logo"></i>
-                </a>
-            </div>
-            <p class="copyright-text">&copy; 2025 Ihsan Innovators. All Rights Reserved.</p>
-        </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('physics-canvas');
-            if (!canvas) return;
-            const { Engine, Render, Runner, World, Bodies, Mouse, MouseConstraint, Composite } = Matter;
-            const engine = Engine.create();
-            const world = engine.world;
-            const render = Render.create({
-                canvas: canvas,
-                engine: engine,
-                options: {
-                    width: window.innerWidth,
-                    height: window.innerHeight,
-                    wireframes: false,
-                    background: 'transparent',
-                }
-            });
-            const wallOptions = { isStatic: true, render: { visible: false } };
-            const ground = Bodies.rectangle(window.innerWidth / 2, window.innerHeight + 25, window.innerWidth, 50, wallOptions);
-            const ceiling = Bodies.rectangle(window.innerWidth / 2, -25, window.innerWidth, 50, wallOptions);
-            const leftWall = Bodies.rectangle(-25, window.innerHeight / 2, 50, window.innerHeight, wallOptions);
-            const rightWall = Bodies.rectangle(window.innerWidth + 25, window.innerHeight / 2, 50, window.innerHeight, wallOptions);
-            World.add(world, [ground, ceiling, leftWall, rightWall]);
-            const objectSize = 20;
-            const objectColor = 'rgba(255, 255, 255, 0.1)';
-            const stack = Matter.Composites.stack(50, 50, 20, 15, 10, 10, (x, y) => {
-                return Bodies.rectangle(x, y, objectSize, objectSize, {
-                    render: {
-                        fillStyle: objectColor,
-                        strokeStyle: 'transparent'
-                    }
-                });
-            });
-            World.add(world, stack);
-            const mouse = Mouse.create(render.canvas);
-            const mouseConstraint = MouseConstraint.create(engine, {
-                mouse: mouse,
-                constraint: {
-                    stiffness: 0.2,
-                    render: { visible: false }
-                }
-            });
-            World.add(world, mouseConstraint);
-            render.mouse = mouse;
-            Render.run(render);
-            const runner = Runner.create();
-            Runner.run(runner, engine);
-            window.addEventListener('resize', () => {
-                render.canvas.width = window.innerWidth;
-                render.canvas.height = window.innerHeight;
-                Render.setPixelRatio(render, window.devicePixelRatio);
-                Matter.Body.setPosition(ground, { x: window.innerWidth / 2, y: window.innerHeight + 25 });
-                Matter.Body.setPosition(ceiling, { x: window.innerWidth / 2, y: -25 });
-                Matter.Body.setPosition(leftWall, { x: -25, y: window.innerHeight / 2 });
-                Matter.Body.setPosition(rightWall, { x: window.innerWidth + 25, y: window.innerHeight / 2 });
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Header and Navigation Elements ---
+    const header = document.getElementById('main-header');
+    const mainContent = document.querySelector('main'); 
+    const nav = document.querySelector('.main-nav'); 
+    const highlighter = nav ? nav.querySelector('.highlighter') : null; 
+    const activeLink = nav ? nav.querySelector('a.active') : null; 
+    const links = nav ? nav.querySelectorAll('li a') : []; 
+
+    let isInitialPageLoad = true; 
+
+    // --- Mobile Navigation Toggle ---
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.main-nav');
+    const body = document.body;
+
+    if (hamburgerMenu && navMenu) {
+        hamburgerMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            hamburgerMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('open');
+                hamburgerMenu.classList.remove('active');
+                body.classList.remove('menu-open');
             });
         });
-    </script>
-</body>
-</html>
+
+        document.addEventListener('click', (event) => {
+            if (body.classList.contains('menu-open') && 
+                !navMenu.contains(event.target) && 
+                !hamburgerMenu.contains(event.target)) {
+
+                navMenu.classList.remove('open');
+                hamburgerMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            }
+        });
+    }
+
+    // --- Dynamic Header Padding ---
+    function setMainPadding() {
+        if (header && mainContent) {
+            const headerHeight = header.offsetHeight; 
+            mainContent.style.paddingTop = `${headerHeight}px`;
+        }
+    }
+
+    // --- Navigation Highlighter Logic ---
+    function moveHighlighter(targetLink) {
+        if (!highlighter || !nav) return; 
+
+        if (isInitialPageLoad) { 
+            highlighter.classList.add('no-transition'); 
+        }
+
+        if (targetLink) {
+            const linkRect = targetLink.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
+
+            highlighter.style.width = `${linkRect.width}px`;
+            highlighter.style.height = `${linkRect.height}px`;
+
+            const offsetLeft = linkRect.left - navRect.left;
+            const offsetTop = linkRect.top - navRect.top;
+
+            highlighter.style.transform = `translate(${offsetLeft}px, ${offsetTop}px)`;
+            highlighter.style.opacity = '1'; 
+        } else {
+            highlighter.style.opacity = '0';
+        }
+
+        if (isInitialPageLoad) {
+            requestAnimationFrame(() => {
+                highlighter.classList.remove('no-transition');
+                isInitialPageLoad = false; 
+            });
+        }
+    }
+
+    const initializeLayout = () => {
+        setMainPadding();
+        if (activeLink) {
+            moveHighlighter(activeLink);
+        } else if (highlighter) {
+            highlighter.style.opacity = '0';
+        }
+    };
+
+    window.addEventListener('load', initializeLayout);
+    window.addEventListener('resize', initializeLayout);
+    initializeLayout();
+
+    // --- Auto-Hiding Header Effect ---
+    let lastScrollTop = 0;
+    if (header) {
+        window.addEventListener('scroll', () => {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            if (currentScrollTop > lastScrollTop && currentScrollTop > header.offsetHeight) {
+                header.classList.add('header-hidden');
+            } else {
+                header.classList.remove('header-hidden');
+            }
+            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
+        });
+    }
+
+    // --- Navigation Highlighter Hover Effect ---
+    if (nav && highlighter) { 
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => moveHighlighter(link));
+        });
+
+        nav.addEventListener('mouseleave', () => {
+            if (activeLink) {
+                moveHighlighter(activeLink); 
+            } else {
+                highlighter.style.opacity = '0';
+            }
+        });
+    }
+
+    // --- Scroll-Reveal Animation Trigger ---
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    const elementsToReveal = document.querySelectorAll('.reveal-on-scroll'); 
+    elementsToReveal.forEach(el => revealObserver.observe(el));
+
+    // --- Expand/Collapse for Team Cards ---
+    const teamCards = document.querySelectorAll('.team-card');
+
+    teamCards.forEach(card => {
+        const moreButton = card.querySelector('.more-button');
+        const aboutSection = card.querySelector('.about-me-section');
+
+        if (moreButton && aboutSection) {
+            moreButton.addEventListener('click', () => {
+                const isExpanded = aboutSection.classList.toggle('expanded');
+                moreButton.textContent = isExpanded ? 'Less' : 'More';
+            });
+        }
+    });
+
+    // --- Animated & Color-Changing Year Percentage Meter ---
+    const animateMeter = (element, finalValue, duration) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+            const currentNumber = Math.floor(progress * finalValue);
+            element.textContent = `${currentNumber}% Done`;
+
+            element.style.backgroundPosition = `${currentNumber}% 0%`;
+
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                element.textContent = `${finalValue}% Done`;
+                element.style.backgroundPosition = `${finalValue}% 0%`;
+            }
+        };
+        window.requestAnimationFrame(step);
+    };
+
+    function startMeterAnimations() {
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            const meter = item.querySelector('.percentage-meter');
+            const year = parseInt(item.dataset.year, 10);
+
+            if (!year || !meter) return;
+
+            let finalPercentage = 0;
+            const now = new Date();
+
+            if (now.getFullYear() > year) {
+                finalPercentage = 100;
+            } else if (now.getFullYear() === year) {
+                const startOfYear = new Date(year, 0, 1);
+                const endOfYear = new Date(year + 1, 0, 1);
+                const totalMilliseconds = endOfYear - startOfYear;
+                const elapsedMilliseconds = now - startOfYear;
+                finalPercentage = Math.floor((elapsedMilliseconds / totalMilliseconds) * 100);
+            }
+
+            animateMeter(meter, finalPercentage, 2000);
+        });
+    }
+    startMeterAnimations();
+
+});
