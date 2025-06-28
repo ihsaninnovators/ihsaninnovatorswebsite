@@ -179,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.requestAnimationFrame(step);
     };
 
-    // --- Function to start all meter animations on page load ---
     function startMeterAnimations() {
         document.querySelectorAll('.timeline-item').forEach(item => {
             const meter = item.querySelector('.percentage-meter');
@@ -189,8 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let finalPercentage = 0;
             const now = new Date();
-            // In case you want to test future dates, you can uncomment the line below:
-            // const now = new Date('2025-08-01T12:00:00'); 
 
             if (now.getFullYear() > year) {
                 finalPercentage = 100;
@@ -205,8 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
             animateMeter(meter, finalPercentage, 2000);
         });
     }
-
-    // Start the meter animations automatically
     startMeterAnimations();
 
 });
