@@ -35,7 +35,7 @@ html {
 body {
     background-color: #1A1A1A;
     color: var(--primary-text-color);
-    font-family: 'Nunito Sans', sans-serif; 
+    font-family: 'Nunito Sans', sans-serif;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
@@ -75,16 +75,16 @@ p {
     width: 100%;
     padding: 20px 0;
     z-index: 100;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-out, box-shadow 0.3s ease, border-bottom 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .main-header.scrolled {
-    background-color: rgba(17, 17, 17, 0.95); 
+    background-color: rgba(17, 17, 17, 0.95);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .main-header.header-hidden {
@@ -103,33 +103,33 @@ p {
     font-size: 1.5rem;
     color: var(--primary-text-color);
     text-decoration: none;
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.logo-header .text-group { 
+.logo-header .text-group {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    line-height: 1; 
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
 }
 
 .header-logo-img {
     height: 50px;
 }
 
-.logo-header .text-group span:first-of-type { 
-    font-size: 1.5rem; 
+.logo-header .text-group span:first-of-type {
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 1.2; 
+    line-height: 1.2;
 }
 
-.logo-header .team-number { 
-    font-size: 0.75rem; 
-    font-weight: 400; 
-    color: var(--secondary-text-color); 
-    margin-top: -5px; 
+.logo-header .team-number {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--secondary-text-color);
+    margin-top: -5px;
 }
 
 
@@ -137,8 +137,8 @@ p {
     display: flex;
     align-items: center;
     list-style: none;
-    position: relative; 
-    flex-direction: row; 
+    position: relative;
+    flex-direction: row;
 }
 
 .main-nav ul li {
@@ -147,12 +147,12 @@ p {
 
 .main-nav .highlighter {
     position: absolute;
-    background: linear-gradient(45deg, #1d4ed8, #1e3a8a); 
+    background: linear-gradient(45deg, #1d4ed8, #1e3a8a);
     border-radius: 999px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     z-index: 1;
     opacity: 1;
-    box-shadow: 0 0 20px rgba(29, 78, 216, 0.5); 
+    box-shadow: 0 0 20px rgba(29, 78, 216, 0.5);
 }
 
 .main-nav .highlighter.no-transition {
@@ -168,7 +168,7 @@ p {
     padding: 8px 18px;
     border-radius: 999px;
     transition: color 0.3s ease;
-    position: relative; 
+    position: relative;
     z-index: 2;
     display: flex;
     align-items: center;
@@ -217,18 +217,41 @@ p {
 
 
 /* --- HERO SECTION & GENERAL HEADINGS --- */
+/* Base font for all Poppins-based titles */
 .hero-content h1, .page-title-section h1, .grid-col-text h2, .service-card h3, .section-header h2, .team-card h3, .sub-team-item h2, .contact-block h2, .about-title h1, .year-label {
     font-family: 'Poppins', sans-serif;
 }
 
-.text-gradient {
-    background: linear-gradient(90deg, #007BFF, #a855f7, #007BFF);
+/* Styles for BIG titles with shimmer effect (Home page hero, main page titles) */
+.hero-content h1,
+.page-title-section h1,
+.sub-teams-intro h1,
+.about-title h1 {
+    background: linear-gradient(90deg, #00a0ff, #8400ff, #00a0ff); /* Your existing gradient */
     background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 8px rgba(0, 123, 255, 0.3), 0 0 8px rgba(168, 85, 247, 0.3);
-    animation: shimmer 10s linear infinite; /* Faster shimmer animation */
+    text-shadow: 0 0 10px rgba(0, 160, 255, 0.3), 0 0 8px rgba(132, 0, 255, 0.3); /* Your existing text-shadow */
+    animation: shimmer 10s linear infinite; /* Your existing shimmer animation */
+}
+
+/* Styles for smaller titles with static white gradient and glow (no shimmer) */
+/* Styles for smaller titles with static white gradient and glow (no shimmer) */
+/* Styles for smaller titles with static white gradient and glow (no shimmer) */
+.section-header h2,
+.team-category-heading h2,
+.grid-col-text h2,
+.service-card h3,
+.sub-team-item h2,
+.contact-block h2 {
+    /* Updated to a left-to-right gradient: brighter left, darker right */
+    background: linear-gradient(to right, #ffffff, #bababa, #a3a3a3); /* Left-right gradient with specified colors */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.1); /* Reduced white glow (as per previous request) */
+    /* NO ANIMATION HERE for static gradient */
 }
 
 
@@ -247,7 +270,7 @@ p {
 
 .hero-content h1 {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.2; 
+    line-height: 1.2;
     margin-bottom: 20px;
     padding-bottom: 0.1em;
 }
@@ -261,7 +284,7 @@ p {
 a.cta-button,
 button.cta-button {
     display: inline-block;
-    background: linear-gradient(45deg, #1d4ed8, #1e3a8a); 
+    background: linear-gradient(45deg, #1d4ed8, #1e3a8a);
     color: #fff;
     padding: 15px 30px;
     border-radius: 8px;
@@ -271,13 +294,13 @@ button.cta-button {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(29, 78, 216, 0.4); 
+    box-shadow: 0 4px 15px rgba(29, 78, 216, 0.4);
 }
 
 a.cta-button:hover,
 button.cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(29, 78, 216, 0.6); 
+    box-shadow: 0 8px 25px rgba(29, 78, 216, 0.6);
 }
 
 .learn-more-container {
@@ -301,8 +324,8 @@ button.cta-button:hover {
 }
 
 .section-header p, .service-card p, .grid-col-text p, .page-title-section .subtitle, .hero-content p, .sub-teams-intro p, .sub-team-item p, .sub-team-item li, .contact-block p, .about-text-box p, .event-description p {
-    line-height: 1.8; 
-    font-weight: 400; 
+    line-height: 1.8;
+    font-weight: 400;
 }
 
 
@@ -394,7 +417,7 @@ div.service-card:hover {
 
 /* --- STYLES FOR ABOUT & GENERIC PAGES --- */
 .page-title-section {
-    padding: 140px 0 40px 0; 
+    padding: 140px 0 40px 0;
     text-align: center;
 }
 
@@ -441,7 +464,7 @@ div.service-card:hover {
 }
 
 .content-section {
-    padding: 40px 0 80px 0; 
+    padding: 40px 0 80px 0;
 }
 
 .grid-two-cols {
@@ -463,7 +486,7 @@ div.service-card:hover {
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 20px;
-    max-width: 1000px; 
+    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -477,12 +500,12 @@ div.service-card:hover {
 
 .team-card {
     background: linear-gradient(180deg, #2a2a2a, #1E1E1E);
+    padding: 20px;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-start; 
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -494,10 +517,10 @@ div.service-card:hover {
 .team-card .card-image {
     width: 100%;
     height: 200px;
-    border-radius: 8px; 
+    border-radius: 8px;
     overflow: hidden;
     background-color: var(--bg-color);
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
 }
 
 .team-card .card-image img {
@@ -537,16 +560,16 @@ div.service-card:hover {
 }
 
 .team-category-heading {
-    grid-column: 1 / -1; 
+    grid-column: 1 / -1;
     text-align: center;
     margin-top: 40px;
     margin-bottom: 20px;
-    display: block; 
-    width: 100%; 
+    display: block;
+    width: 100%;
 }
 
 .team-category-heading h2 {
-    font-size: 2.5rem; 
+    font-size: 2.5rem;
     color: var(--primary-text-color);
     margin-bottom: 0;
 }
@@ -575,17 +598,17 @@ div.service-card:hover {
 }
 
 .sub-teams-intro .contact-button-container {
-    text-align: left; 
-    margin-top: 30px; 
+    text-align: left;
+    margin-top: 30px;
 }
 
 
 .sub-team-item {
     margin-bottom: 40px;
     background: linear-gradient(180deg, #2a2a2a, #1E1E1E);
+    padding: 30px;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 30px;
 }
 
 .sub-team-item:last-child {
@@ -637,8 +660,8 @@ div.service-card:hover {
     margin-top: 5px;
 }
 
-.contact-block .email-link { 
-    color: #85C7F2; 
+.contact-block .email-link {
+    color: #85C7F2;
 }
 
 /* --- TIMELINE STYLES --- */
@@ -651,7 +674,7 @@ div.service-card:hover {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 20px; 
+    gap: 20px;
     width: 100%;
     justify-content: center;
     margin-bottom: 30px;
@@ -674,15 +697,16 @@ div.service-card:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     width: 100%;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 
 .timeline-infobox {
     width: 100%;
-    background-color: var(--bg-color);
+    /* Changed from background-color to background with a linear gradient for a black gradient effect */
+    background: linear-gradient(180deg, #1A1A1A, #000000); /* A subtle top-to-bottom black gradient */
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    box-shadow: none;
+    box-shadow: none; /* Keep this if you don't want a shadow */
     padding: 12px;
     display: flex;
     flex-direction: column;
@@ -872,7 +896,7 @@ div.service-card:hover {
 
 @media (max-width: 600px) {
     .team-grid {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
     .contact-info-layout {
         flex-direction: column;
@@ -889,4 +913,151 @@ div.service-card:hover {
 }
 #aayan-card .card-image img {
     object-position: center 70%;
+}
+/* Add this to your style.css */
+
+.scroll-indicator {
+    position: absolute; /* Position relative to its parent container */
+    bottom: 30px; /* Adjust vertical position from the bottom of parent */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--secondary-text-color);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    z-index: 2; /* Ensure it's above other elements */
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-indicator i {
+    font-size: 1.5rem; /* Size of the Phosphor icon */
+    margin-top: 5px;
+    animation: bounce 1.5s infinite; /* Simple bounce animation for the arrow */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px); /* Move up */
+    }
+    60% {
+        transform: translateY(-4px); /* Move down slightly */
+    }
+}
+
+/* Specific positioning for the scroll indicator on the Sub-Teams page */
+.sub-teams-intro {
+    position: relative; /* Make the intro section the positioning context for the indicator */
+    /* Ensure other existing styles for sub-teams-intro are maintained */
+}
+
+/* Specific positioning for the scroll indicator on the Sub-Teams page */
+/* Add this to your style.css */
+
+.scroll-indicator {
+    position: absolute; /* Position relative to its parent container */
+    bottom: 30px; /* Adjust vertical position from the bottom of parent */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--secondary-text-color); /* Retain existing color */
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    z-index: 2; /* Ensure it's above other elements */
+
+    /* NEW: Styles for the box */
+    background-color: rgba(30, 30, 30, 0.7); /* A subtle dark background, semi-transparent */
+    padding: 10px 15px; /* Padding around content */
+    border-radius: 8px; /* Slightly rounded corners for a modern look */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-indicator i {
+    font-size: 1.5rem; /* Size of the Phosphor icon */
+    margin-top: 5px;
+    animation: bounce 1.5s infinite; /* Simple bounce animation for the arrow */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px); /* Move up */
+    }
+    60% {
+        transform: translateY(-4px); /* Move down slightly */
+    }
+}
+
+/* Specific positioning for the scroll indicator on the Sub-Teams page (to move it right) */
+.sub-teams-intro {
+    position: relative; /* Make the intro section the positioning context for the indicator */
+    /* Ensure other existing styles for sub-teams-intro are maintained */
+}
+
+/* Specific positioning for the scroll indicator on the Sub-Teams page */
+/* Specific positioning for the scroll indicator on the Sub-Teams page */
+.sub-teams-intro {
+    position: relative; /* This is crucial: ensures absolute children are positioned relative to this element */
+    /* Other styles for sub-teams-intro remain */
+}
+
+/* Specific positioning for the scroll indicator on the Sub-Teams page */
+.sub-teams-intro {
+    position: relative; /* This is crucial: ensures absolute children are positioned relative to this element */
+    /* Other styles for sub-teams-intro remain */
+}
+
+.sub-teams-scroll-indicator {
+    position: absolute; /* Keeps it positioned relative to .sub-teams-intro */
+
+    /* ----- ADJUST THIS VALUE TO MOVE UP/DOWN ----- */
+    bottom: -7.79px; /* <-- Change this pixel value.
+                    * Increase the value (e.g., 30px, 40px) to move the box UP.
+                    * Decrease the value (e.g., 10px, 0px, -10px) to move the box DOWN. */
+
+    /* ----- ADJUST THESE VALUES TO MOVE LEFT/RIGHT ----- */
+    /* Choose ONE of these two lines to control horizontal position: */
+    right: 12px; /* <-- To position from the RIGHT edge (e.g., 20px from right).
+                     * Increase this to move MORE LEFT.
+                     * Decrease this to move MORE RIGHT. */
+    /* left: 50px; */ /* <-- OR, to position from the LEFT edge (e.g., 50px from left).
+                     * Increase this to move MORE RIGHT.
+                     * Decrease this to move MORE LEFT. */
+
+    /* IMPORTANT: Ensure 'left' is set to 'auto' if you use 'right', and vice-versa.
+       Also, remove any conflicting 'transform' or 'margin-left' from previous attempts. */
+    left: auto; /* Set to 'auto' if using 'right', or a pixel value if using 'left' */
+    transform: none; /* Remove any previous centering transforms */
+    margin-left: 0;  /* Reset any old margins */
+
+    /* Keep the box styles */
+    background-color: rgba(30, 30, 30, 0.7);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
